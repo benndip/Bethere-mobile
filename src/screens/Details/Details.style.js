@@ -36,10 +36,23 @@ const styles = StyleSheet.create({
         fontSize: 22
     },
     mapContainer: {
-        height: 0.6 * height,
+        height: height,
         width: '100%',
         alignSelf: 'center',
         marginVertical: 20
+    },
+    scrollToBottomView: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        position: 'absolute',
+        backgroundColor: '#ff5252',
+        opacity: 0.9,
+        zIndex: 99999,
+        right: 15,
+        top: 60,
+        justifyContent:'center',
+        alignItems: 'center'
     }
 });
 

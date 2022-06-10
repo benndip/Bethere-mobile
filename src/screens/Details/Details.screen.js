@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TouchableOpacity, Animated, Dimensions } from 'react-native';
 import Modal from 'react-native-modal';
 import ImageViewer from 'react-native-image-zoom-viewer';
-
 import styles from './Details.style';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import { FocusAwareStatusBar, ImageBoard, Map, AutoNavigation } from '../../components';
 import { item_images } from '../../../assets/data';
 
+const { height } = Dimensions.get('screen');
+
+const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
+
 const Details = ({ route }) => {
 
   // const { id, item_images, name, description, location, user, price, category_id } = route.params.item
+
+  const scrollY = useRef(new Animated.Value(0)).current
+  const scrollViewRef = useRef(null);
 
   const [imagesForModal, setImagesForModal] = useState([]);
   const [imagesModalVisible, setImagesModalVisible] = useState(false);
@@ -36,10 +43,21 @@ const Details = ({ route }) => {
     setShowNavigation(prev => !prev);
   }
 
+  const scrollToBottomScale = scrollY.interpolate({
+    inputRange: [-1, 0, height * 0.9],
+    outputRange: [0, 0, 1]
+  })
+
   return (
     <View style={styles.container}>
-      <ScrollView
+      <Animated.ScrollView
+        ref={scrollViewRef}
         showsVerticalScrollIndicator={false}
+        onScroll={Animated.event(
+          [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+          { useNativeDriver: true }
+        )
+        }
       >
         <FocusAwareStatusBar backgroundColor='transparent' barStyle='light-content' translucent />
         <Modal
@@ -60,12 +78,18 @@ const Details = ({ route }) => {
         <Text style={styles.nameOfPlace}>Osing London</Text>
         <Text style={styles.details}>This is the first palace of Ozin and also the best that we can have here. This can just be the best thing that we could do so that we have our being. But I am not saying anything. He</Text>
         <View style={styles.mapContainer}>
+          <AnimatedTouchable
+            onPress={() => scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })}
+            style={[styles.scrollToBottomView, { transform: [{ scale: scrollToBottomScale }] }]}
+          >
+            <AntDesign name='down' size={30} color='#ffffff' />
+          </AnimatedTouchable>
           <Map
             centerCoordinate={[4, 9]}
             placeLocation={[9, 4]}
           />
         </View>
-      </ScrollView>
+      </Animated.ScrollView>
       {showNavigation && <AutoNavigation onCancelNavigation={toggleNavigation} placeLocation={[9, 4]} />}
       <TouchableOpacity
         style={styles.touch}

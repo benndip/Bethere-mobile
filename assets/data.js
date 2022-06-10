@@ -123,14 +123,14 @@ export const places = [
 export const item_images = [
     {
         id: 1,
-        url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
+        url: 'https://www.planetware.com/wpimages/2021/10/world-tourist-attractions-eiffel-tower-flowers-spring.jpg',
     },
     {
         id: 2,
-        url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460',
+        url: 'https://images.unsplash.com/photo-1610981109245-c3f748c98ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHRvdXJpc3QlMjBhdHRyYWN0aW9ufGVufDB8fDB8fA%3D%3D&w=1000&q=80',
     },
     {
         id: 3,
-        url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVfNQ4vVjgx0cbuZ4kblKMMBiYdjSt2PltyZ_-eVup4h187rDqoLMbmH-J4KvdwnW9Hw&usqp=CAU'
     }
 ]
