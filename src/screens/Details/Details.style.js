@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
     nameOfPlace: {
         fontWeight: 'bold',
         marginVertical: 10,
-        fontSize: 22,
-        marginLeft: 5
+        fontSize: 22
     },
     details: {
         textAlign: 'center',
@@ -53,6 +52,23 @@ const styles = StyleSheet.create({
         top: 60,
         justifyContent:'center',
         alignItems: 'center'
+    },
+    placeAndRatingContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginVertical: 10,
+        paddingHorizontal: 5
+    },
+    iconAndRatingContaier: {
+        justifyContent: 'center',
+        width: '22%',
+        height: 60,
+        alignItems: 'center'
+    },
+    ratingText: {
+        fontSize: 12,
+        fontWeight: 'bold'
     }
 });
 

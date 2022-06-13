@@ -5,6 +5,7 @@ import Landing from "./Landing/Landing.screen";
 import Home from "./Home/Home.screen";
 import Map from "./Map/Map.screen";
 import Details from "./Details/Details.screen";
+import Account from "./Account/Account.screen";
 
 export {
     Splash,
@@ -13,5 +14,6 @@ export {
     Landing,
     Home,
     Map,
-    Details
+    Details,
+    Account
 }
