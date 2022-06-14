@@ -13,7 +13,7 @@ const Account = () => {
     const [country, setCountry] = useState('Cameroon');
     const [dateOfBirth, setDateOfBirth] = useState(new Date(1598051730000));
     const [phone, setPhone] = useState('+237 676492408');
-    const [gender, setGender] = useState('Male');
+    const [gender, setGender] = useState('M');
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate;
@@ -71,14 +71,14 @@ const Account = () => {
                     </TouchableOpacity>
                     <Text style={styles.inputTitle}>Gender</Text>
                     <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View>
-                                <Text>First</Text>
-                                <RadioButton value="Male" />
+                        <View style={{ flexDirection: 'row', width: '100%', height: 60, justifyContent: 'space-around' }}>
+                            <View style={styles.buttonAndText}>
+                                <RadioButton color='#24BD87' value="M" />
+                                <Text>Male</Text>
                             </View>
-                            <View>
-                                <Text>Second</Text>
-                                <RadioButton value="Female" />
+                            <View style={styles.buttonAndText}>
+                                <RadioButton color='' value="F" />
+                                <Text>Female</Text>
                             </View>
                         </View>
                     </RadioButton.Group>
@@ -89,8 +89,10 @@ const Account = () => {
                         value={country}
                         onChangeText={(text) => setName(text)}
                     />
-
                 </View>
+                <TouchableOpacity style={styles.updateButton}>
+                    <Text>Update</Text>
+                </TouchableOpacity>
             </ScrollView>
         </View>
     )

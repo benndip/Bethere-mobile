@@ -58,6 +58,22 @@ const styles = StyleSheet.create({
     },
     scroll: {
         width: '100%',
+    },
+    buttonAndText: {
+        width: '48%',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        height: '95%',
+        borderRadius: 8,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    updateButton: {
+        width: '95%',
+        height: 55,
+        backgroundColor: '#3BAFE9',
+        alignSelf: 'center',
+        borderRadius: 8
     }
 });
 
