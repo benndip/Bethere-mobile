@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import styles from './Account.style';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { RadioButton } from 'react-native-paper';
+import PhoneInput from 'react-native-phone-number-input';
 
 const Account = () => {
+
+    const phoneInput = useRef(null);
+
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
 
     const [name, setName] = useState('Oben Tabendip');
     const [country, setCountry] = useState('Cameroon');
     const [dateOfBirth, setDateOfBirth] = useState(new Date(1598051730000));
-    const [phone, setPhone] = useState('+237 676492408');
+    const [phone, setPhone] = useState('676492408');
     const [gender, setGender] = useState('M');
 
     const onChange = (event, selectedDate) => {
@@ -40,7 +44,7 @@ const Account = () => {
             <ScrollView style={styles.scroll}>
                 <TouchableOpacity onPress={() => { }} style={styles.imageAndCamera}>
                     <Image style={styles.profileImage} source={{ uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg' }} />
-                    <View style={{ width: 50, height: 50, borderRadius: 25, justifyContent: 'center', alignItems: 'center', position: 'absolute', right: -5, top: -0, backgroundColor: '#ffffff' }}>
+                    <View style={{ width: 45, height: 45, borderRadius: 30, justifyContent: 'center', alignItems: 'center', position: 'absolute', right: -5, top: -0, backgroundColor: '#ffffff' }}>
                         <View style={{ width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center', backgroundColor: '#24BD87' }}>
                             <Feather
                                 name='camera'
@@ -59,11 +63,17 @@ const Account = () => {
                         onChangeText={(text) => setName(text)}
                     />
                     <Text style={styles.inputTitle}>Phone number</Text>
-                    <TextInput
-                        style={styles.input}
-                        placeholder={phone}
-                        value={phone}
-                        onChangeText={(text) => setName(text)}
+                    <PhoneInput
+                        ref={phoneInput}
+                        defaultValue={phone}
+                        defaultCode="IN"
+                        layout="first"
+                        withShadow
+                        containerStyle={styles.phoneContainer}
+                        textContainerStyle={styles.textInput}
+                        onChangeFormattedText={text => {
+                            setPhone(text);
+                        }}
                     />
                     <Text style={styles.inputTitle}>Date of birth</Text>
                     <TouchableOpacity onPress={openDatePicker} style={styles.datePickerTouch}>
@@ -91,7 +101,7 @@ const Account = () => {
                     />
                 </View>
                 <TouchableOpacity style={styles.updateButton}>
-                    <Text>Update</Text>
+                    <Text style={styles.updateText}>Update</Text>
                 </TouchableOpacity>
             </ScrollView>
         </View>

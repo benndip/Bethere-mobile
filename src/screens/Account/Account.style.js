@@ -71,10 +71,61 @@ const styles = StyleSheet.create({
     updateButton: {
         width: '95%',
         height: 55,
-        backgroundColor: '#3BAFE9',
+        backgroundColor: '#24BD87',
         alignSelf: 'center',
-        borderRadius: 8
-    }
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 5,
+        marginBottom: 20
+    },
+    updateText: {
+        fontWeight: '700',
+        fontSize: 20,
+        color: '#ffffff'
+    },
+    countryCodePicker: {
+        alignSelf: 'center',
+        position: 'absolute'
+      },
+      togglerContainerStyle: {
+        backgroundColor: '#baffc0',
+        borderRadius: 10,
+        padding: 5,
+      },
+      togglerLabelStyle: {
+        fontSize: 20,
+      },
+      searchInputStyle: {
+        borderColor: '#888888',
+        borderWidth: 1,
+        height: 36,
+        borderRadius: 10,
+        paddingHorizontal: 10,
+      },
+      pickerItemLabelStyle: {
+        marginLeft: 10,
+        marginVertical: 10,
+        alignSelf: 'center',
+      },
+      pickerItemContainerStyle: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignSelf: 'center',
+      },
+      phoneContainer: {
+        borderWidth: 1,
+        width: '100%',
+        borderRadius: 6,
+        height: 55,
+        alignSelf: 'center',
+        borderColor: '#ccc',
+        paddingHorizontal: 10
+      },
+      textInput: {
+        paddingVertical: 0,
+      },
 });
 
 export default styles;
