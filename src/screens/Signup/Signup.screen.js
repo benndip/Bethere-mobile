@@ -1,16 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, Platform, ToastAndroid } from 'react-native';
-import isEmail from 'validator/lib/isEmail';
+import PhoneInput from 'react-native-phone-number-input';
+import { RadioButton } from 'react-native-paper';
+import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 import styles from './Signup.style'
 
 import { FormInput, FormButton, SocialButton, FocusAwareStatusBar } from '../../components';
 
 const Signup = ({ navigation }) => {
-  const [email, setEmail] = useState('');
+
+  const phoneInput = useRef(null);
+
+  const [country, setCountry] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hasError, setHasError] = useState(false);
+  const [gender, setGender] = useState('M');
+  const [dateOfBirth, setDateOfBirth] = useState('');
 
   const showToastWithGravityAndOffset = (message) => {
     ToastAndroid.showWithGravityAndOffset(
@@ -23,19 +31,34 @@ const Signup = ({ navigation }) => {
   };
 
 
-  const registerUser =  async () =>{
-    if(email.length == 0 || password.length == 0 || confirmPassword.length == 0){
+  const registerUser = async () => {
+    if (email.length == 0 || password.length == 0 || confirmPassword.length == 0) {
       setHasError(true);
       showToastWithGravityAndOffset('All Input fields must be filled')
       return false;
     }
-    
-    if(password !== confirmPassword){
+
+    if (password !== confirmPassword) {
       setHasError(true);
       showToastWithGravityAndOffset('Password does not match')
       return false;
     }
 
+  }
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDateOfBirth(currentDate);
+    console.log(currentDate);
+  };
+
+  const openDatePicker = () => {
+    DateTimePickerAndroid.open({
+      value: dateOfBirth,
+      onChange,
+      mode: 'date',
+      is24Hour: true
+    });
   }
 
   return (
@@ -44,13 +67,38 @@ const Signup = ({ navigation }) => {
       <Text style={styles.text}>Welcome to <Text style={{ color: '#ff6b6b', fontWeight: 'bold', fontSize: 28 }}>Bethere</Text> 🔥</Text>
 
       <FormInput
-        labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Phone number"
-        iconType="user"
-        keyboardType="phone-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
+        labelValue={password}
+        onChangeText={(country) => setCountry(country)}
+        placeholderText="Country"
+        iconType="Safety"
+      />
+
+      <TouchableOpacity onPress={openDatePicker} style={styles.datePickerTouch}>
+        <Text style={styles.datePickerText}>{dateOfBirth.length == 0 ? 'Date of birth' : dateOfBirth.toDateString()}</Text>
+      </TouchableOpacity>
+
+      <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
+        <View style={{ flexDirection: 'row', width: '100%', height: 60, justifyContent: 'space-around', marginTop: 5, marginBottom: 10 }}>
+          <View style={styles.buttonAndText}>
+            <RadioButton color='#24BD87' value="M" />
+            <Text>Male</Text>
+          </View>
+          <View style={styles.buttonAndText}>
+            <RadioButton color='' value="F" />
+            <Text>Female</Text>
+          </View>
+        </View>
+      </RadioButton.Group>
+
+      <PhoneInput
+        ref={phoneInput}
+        defaultValue={phone}
+        defaultCode="IN"
+        layout="first"
+        withShadow={false}
+        containerStyle={styles.phoneContainer}
+        textContainerStyle={styles.textInput}
+        onChangeFormattedText={text => setPhone(text)}
       />
 
       <FormInput
@@ -88,27 +136,6 @@ const Signup = ({ navigation }) => {
           Privacy Policy
         </Text>
       </View>
-
-      {Platform.OS === 'android' ? (
-        <View>
-          <SocialButton
-            buttonTitle="Sign Up with Facebook"
-            btnType="facebook"
-            color="#4867aa"
-            backgroundColor="#e6eaf4"
-            onPress={() => { }}
-          />
-
-          <SocialButton
-            buttonTitle="Sign Up with Google"
-            btnType="google"
-            color="#de4d41"
-            backgroundColor="#f5e7ea"
-            onPress={() => { }}
-          />
-        </View>
-      ) : null}
-
       <TouchableOpacity
         style={styles.navButton}
         onPress={() => navigation.navigate('Login')}>

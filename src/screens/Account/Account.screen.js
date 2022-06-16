@@ -68,7 +68,7 @@ const Account = () => {
                         defaultValue={phone}
                         defaultCode="IN"
                         layout="first"
-                        withShadow
+                        withShadow={false}
                         containerStyle={styles.phoneContainer}
                         textContainerStyle={styles.textInput}
                         onChangeFormattedText={text => {

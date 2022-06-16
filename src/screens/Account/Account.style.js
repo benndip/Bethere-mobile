@@ -126,6 +126,19 @@ const styles = StyleSheet.create({
       textInput: {
         paddingVertical: 0,
       },
+      datePickerTouch: {
+        width: '100%',
+        borderRadius: 6,
+        height: 55,
+        borderWidth: 1,
+        alignSelf: 'center',
+        borderColor: '#ccc',
+        justifyContent: 'center',
+        paddingHorizontal: 10
+    },
+    datePickerText: {
+        color: '#000'
+    },
 });
 
 export default styles;
