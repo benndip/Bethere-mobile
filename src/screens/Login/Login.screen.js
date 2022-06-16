@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,12 +8,17 @@ import {
   ScrollView
 } from 'react-native';
 
+import PhoneInput from 'react-native-phone-number-input';
+
 import styles from './Login.style';
 
-import {FormInput, FormButton, SocialButton, FocusAwareStatusBar} from '../../components'
+import { FormInput, FormButton, SocialButton, FocusAwareStatusBar } from '../../components'
 
-const Login = ({navigation}) => {
-  const [email, setEmail] = useState();
+const Login = ({ navigation }) => {
+
+  const phoneInput = useRef(null);
+
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState();
 
 
@@ -23,21 +28,22 @@ const Login = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#f9fafd" />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#2e64e5" />
       <Image
         source={require('../../../assets/images/auth.png')}
         style={styles.logo}
       />
       <Text style={{ color: '#ff6b6b', fontWeight: 'bold', fontSize: 28, marginVertical: 20 }}>Bethere</Text>
 
-      <FormInput
-        labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Phone number"
-        iconType="user"
-        keyboardType="phone-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
+      <PhoneInput
+        ref={phoneInput}
+        defaultValue={phone}
+        defaultCode="IN"
+        layout="first"
+        withShadow={false}
+        containerStyle={styles.phoneContainer}
+        textContainerStyle={styles.textInput}
+        onChangeFormattedText={text => setPhone(text)}
       />
 
       <FormInput
@@ -46,6 +52,7 @@ const Login = ({navigation}) => {
         placeholderText="Password"
         iconType="lock"
         secureTextEntry={true}
+        passwordInput
       />
 
       <FormButton
@@ -53,30 +60,10 @@ const Login = ({navigation}) => {
         onPress={() => login(email, password)}
       />
 
-      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
+      <TouchableOpacity style={styles.forgotButton} onPress={() => { }}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity>
-
-      {Platform.OS === 'android' ? (
-        <View>
-          <SocialButton
-            buttonTitle="Sign In with Facebook"
-            btnType="facebook"
-            color="#4867aa"
-            backgroundColor="#e6eaf4"
-            onPress={() => fbLogin()}
-          />
-
-          <SocialButton
-            buttonTitle="Sign In with Google"
-            btnType="google"
-            color="#de4d41"
-            backgroundColor="#f5e7ea"
-            onPress={() => googleLogin()}
-          />
-        </View>
-      ) : null}
-
+      
       <TouchableOpacity
         style={styles.forgotButton}
         onPress={() => navigation.navigate('Signup')}>

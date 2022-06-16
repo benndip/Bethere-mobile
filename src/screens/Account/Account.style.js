@@ -1,12 +1,11 @@
-import { StyleSheet, StatusBar, Dimensions } from "react-native";
-
-const { width, height } = Dimensions.get('screen');
+import { StyleSheet, StatusBar } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
         paddingTop: StatusBar.currentHeight,
+        paddingHorizontal: 3,
         backgroundColor: '#ffffff'
     },
     imageAndCamera: {
@@ -15,6 +14,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center',
+        marginTop: 30
     },
     profileImage: {
         width: 100,
@@ -139,6 +139,23 @@ const styles = StyleSheet.create({
     datePickerText: {
         color: '#000'
     },
+    textAndIconsContainer: {
+      paddingVertical: 5,
+      paddingHorizontal: 5,
+      width: 130,
+      position: 'absolute',
+      flexDirection: 'row',
+      zIndex: 99999,
+      justifyContent: 'space-between',
+      right: '1%',
+    },
+    textAndIcon: {
+      width: '45%',
+      alignItems: 'center',
+    },
+    iconText: {
+      fontSize: 12
+    }
 });
 
 export default styles;

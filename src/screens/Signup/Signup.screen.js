@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, TouchableOpacity, Platform, ToastAndroid } from 'react-native';
+import { View, Text, TouchableOpacity, ToastAndroid } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
 import { RadioButton } from 'react-native-paper';
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 
 import styles from './Signup.style'
 
-import { FormInput, FormButton, SocialButton, FocusAwareStatusBar } from '../../components';
+import { FormInput, FormButton, FocusAwareStatusBar } from '../../components';
 
 const Signup = ({ navigation }) => {
 
@@ -32,7 +32,7 @@ const Signup = ({ navigation }) => {
 
 
   const registerUser = async () => {
-    if (email.length == 0 || password.length == 0 || confirmPassword.length == 0) {
+    if (email.length == 0 || password.length == 0 || confirmPassword.length == 0 || country.length < 4) {
       setHasError(true);
       showToastWithGravityAndOffset('All Input fields must be filled')
       return false;
@@ -49,12 +49,11 @@ const Signup = ({ navigation }) => {
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setDateOfBirth(currentDate);
-    console.log(currentDate);
   };
 
   const openDatePicker = () => {
     DateTimePickerAndroid.open({
-      value: dateOfBirth,
+      value: new Date(),
       onChange,
       mode: 'date',
       is24Hour: true
@@ -63,7 +62,7 @@ const Signup = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <FocusAwareStatusBar barStyle="dark-content" backgroundColor="#f9fafd" />
+      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#2e64e5" />
       <Text style={styles.text}>Welcome to <Text style={{ color: '#ff6b6b', fontWeight: 'bold', fontSize: 28 }}>Bethere</Text> 🔥</Text>
 
       <FormInput
@@ -80,11 +79,11 @@ const Signup = ({ navigation }) => {
       <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
         <View style={{ flexDirection: 'row', width: '100%', height: 60, justifyContent: 'space-around', marginTop: 5, marginBottom: 10 }}>
           <View style={styles.buttonAndText}>
-            <RadioButton color='#24BD87' value="M" />
+            <RadioButton color='#2e64e5' value="M" />
             <Text>Male</Text>
           </View>
           <View style={styles.buttonAndText}>
-            <RadioButton color='' value="F" />
+            <RadioButton color='#2e64e5' value="F" />
             <Text>Female</Text>
           </View>
         </View>
