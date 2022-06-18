@@ -1,5 +1,7 @@
 import { StyleSheet, StatusBar } from "react-native";
 
+import theme from "../../theme";
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     updateButton: {
         width: '95%',
         height: 55,
-        backgroundColor: '#24BD87',
+        backgroundColor: theme.PRIMARY_COLOR,
         alignSelf: 'center',
         borderRadius: 8,
         justifyContent: 'center',

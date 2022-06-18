@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, StatusBar } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, withSpring } from 'react-native-reanimated';
 
 
@@ -29,6 +29,7 @@ const Splash = () => {
 
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor='#6C63FF' />
       <Image source={require('../../../assets/images/splash.png')} style={styles.image} />
       <Animated.Text style={[styles.bethereText, bethereTextAnimatedStyles]}>Be<Text style={{ color: '#6C63FF' }}>there</Text> <Text style={{ color: '#FF6584' }}>!</Text> </Animated.Text>
       <Animated.Text style={[styles.belowText, belowTextAnimatedStyles]}>From <Text style={{ fontSize: 22, color: '#FF6584', fontWeight: 'bold' }}>Immersecity</Text> <Text style={{ fontSize: 100 }}>.</Text></Animated.Text>

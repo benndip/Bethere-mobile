@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, Platform, FlatList } from 'react-native';
+import { View, TouchableOpacity, Platform, FlatList } from 'react-native';
 import { FocusAwareStatusBar, MapPlace, MapPlaceType } from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -12,7 +12,7 @@ import { places, placetypes } from '../../../assets/data';
 MapboxGL.setAccessToken("pk.eyJ1IjoiYmVubmRpcCIsImEiOiJjbDN2OXFsZnQwaXdxM2lwaWlnbjhpOTF2In0.gM_r3V8ooTJficCmGqVgIg");
 
 
-const Map = () => {
+const Map = ({ navigation }) => {
 
     const IS_ANDROID = Platform.OS === 'android';
 
@@ -45,12 +45,12 @@ const Map = () => {
     return (
         <View style={styles.container}>
             <FocusAwareStatusBar barStyle='dark-content' translucent backgroundColor='transparent' />
-            <View style={styles.backArrowContainer}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.backArrowContainer}>
                 <Ionicons name='chevron-back-sharp' color='#ffffff' size={20} />
-            </View>
-            <View style={styles.filterContainer}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.filterContainer}>
                 <FontAwesome name='filter' color='#ffffff' size={20} />
-            </View>
+            </TouchableOpacity>
             <View style={styles.mapContaier}>
                 <MapboxGL.MapView
                     style={styles.map}

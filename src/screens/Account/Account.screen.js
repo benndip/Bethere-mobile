@@ -11,6 +11,8 @@ import Animated, { useSharedValue, useAnimatedStyle, withSpring, withTiming } fr
 
 const { height } = Dimensions.get('screen');
 
+import theme from '../../theme';
+
 const Account = () => {
 
     const phoneInput = useRef(null);
@@ -87,12 +89,12 @@ const Account = () => {
 
     return (
         <View style={styles.container}>
-            <FocusAwareStatusBar backgroundColor='#24BD87' />
+            <FocusAwareStatusBar backgroundColor={theme.PRIMARY_COLOR} />
             <ScrollView style={styles.scroll} showsVerticalScrollIndicator={false}>
                 <TouchableOpacity onPress={toggleImageSelection} style={styles.imageAndCamera}>
                     <Image style={styles.profileImage} source={{ uri: 'https://www.diethelmtravel.com/wp-content/uploads/2016/04/bill-gates-wealthiest-person.jpg' }} />
                     <View style={{ width: 45, height: 45, borderRadius: 30, justifyContent: 'center', alignItems: 'center', position: 'absolute', right: -5, top: -0, backgroundColor: '#ffffff' }}>
-                        <View style={{ width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center', backgroundColor: '#24BD87' }}>
+                        <View style={{ width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.PRIMARY_COLOR }}>
                             <Feather
                                 name={selectingImage ? 'x-circle' : 'edit'}
                                 size={20}
@@ -149,11 +151,11 @@ const Account = () => {
                     <RadioButton.Group onValueChange={newValue => setGender(newValue)} value={gender}>
                         <View style={{ flexDirection: 'row', width: '100%', height: 60, justifyContent: 'space-around' }}>
                             <View style={styles.buttonAndText}>
-                                <RadioButton color='#24BD87' value="M" />
+                                <RadioButton color={theme.PRIMARY_COLOR} value="M" />
                                 <Text>Male</Text>
                             </View>
                             <View style={styles.buttonAndText}>
-                                <RadioButton color='' value="F" />
+                                <RadioButton color={theme.PRIMARY_COLOR} value="F" />
                                 <Text>Female</Text>
                             </View>
                         </View>

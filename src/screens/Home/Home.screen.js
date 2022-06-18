@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -7,7 +7,10 @@ import styles from './Home.style';
 import { FocusAwareStatusBar, PlacetypeCard, PlaceCard } from '../../components';
 import { placetypes, places } from '../../../assets/data';
 
-const Home = () => {
+const Home = ({ navigation }) => {
+
+  const [placeTypesToShow, setPlaceTypesToShow] = useState([]);
+  const [showingAllPlaceTypes, setShowingAllPlaceTypes] = useState(false);
 
   const renderItem = ({ item }) => {
     return (
@@ -15,13 +18,29 @@ const Home = () => {
     )
   }
 
+  const togglePlaceTypes = () => {
+    let placeTypes = showingAllPlaceTypes ? placetypes.filter((_, index) => index < 6) : placetypes;
+    setPlaceTypesToShow(placeTypes);
+    setShowingAllPlaceTypes(prev => !prev);
+  }
+
+  const inititiatePlaceTypes = () => {
+    let placeTypes = placetypes.filter((_, index) => index < 6)
+    setPlaceTypesToShow(placeTypes);
+  }
+
+  useEffect(() => {
+    inititiatePlaceTypes() //This is to give just 6 placetypes initially
+  }, [])
+
+
   return (
     <View style={styles.container}>
       <FocusAwareStatusBar barStyle='dark-content' translucent backgroundColor='transparent' />
 
       {/* Top view */}
       <View style={styles.topView}>
-        <TouchableOpacity style={styles.drawerIconContainer}>
+        <TouchableOpacity onPress={() => navigation.openDrawer()} style={styles.drawerIconContainer}>
           <Svg
             height="80%" width="80%"
             viewBox="0 0 20 20"
@@ -50,13 +69,13 @@ const Home = () => {
         ListHeaderComponent={
           <>
             <View style={styles.placetypesContainer}>
-              {placetypes.map(placetype=>(
+              {placeTypesToShow.map(placetype => (
                 <PlacetypeCard item={placetype} key={placetype.id} />
               ))}
             </View>
             <View style={styles.popularAndViewAll}>
               <Text style={styles.popularText}>Popular in Town</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={togglePlaceTypes}>
                 <Text style={styles.viewAllText}>View all</Text>
               </TouchableOpacity>
             </View>

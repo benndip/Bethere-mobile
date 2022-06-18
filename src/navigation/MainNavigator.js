@@ -3,18 +3,20 @@ import { View, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { Splash, Login, Signup, Landing, Home, Map, Details, Account, MainScene, MainArScene } from '../screens';
+import DrawerNavigation from './DrawerNavigation';
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
   return (
     <Stack.Navigator 
-        initialRouteName="Details"
+        initialRouteName="DrawerNavigation"
         screenOptions={{
             headerShown: false,
         }}
     >
         <Stack.Screen name='Spalsh' component={Splash} />
+        <Stack.Screen name='DrawerNavigation' component={DrawerNavigation} />
         <Stack.Screen name='Signup' component={Signup} />
         <Stack.Screen name='Login' component={Login} />
         <Stack.Screen name='Landing' component={Landing} />

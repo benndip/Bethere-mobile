@@ -17,7 +17,7 @@ const SceneOne = ({ sceneNavigator }) => {
     return (
         <ViroScene>
             <Viro360Image
-                source={require('../../../../assets/images/ActiveSpaces_360_images/shop.jpg')}
+                source={require('../../../../assets/images/360images/shop.jpg')}
                 onLoadEnd={_onLoadEnd}
             />
             {
