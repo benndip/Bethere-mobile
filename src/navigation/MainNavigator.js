@@ -2,14 +2,14 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Splash, Login, Signup, Landing, Home, Map, Details, Account } from '../screens';
+import { Splash, Login, Signup, Landing, Home, Map, Details, Account, MainScene, MainArScene } from '../screens';
 
 const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
   return (
     <Stack.Navigator 
-        initialRouteName="Account"
+        initialRouteName="Details"
         screenOptions={{
             headerShown: false,
         }}
@@ -22,6 +22,8 @@ const MainNavigator = () => {
         <Stack.Screen name='Map' component={Map} />
         <Stack.Screen name='Details' component={Details} />
         <Stack.Screen name='Account' component={Account} />
+        <Stack.Screen name='MainScene' component={MainScene} />
+        <Stack.Screen name='MainArScene' component={MainArScene} />
     </Stack.Navigator>
   )
 }

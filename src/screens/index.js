@@ -6,6 +6,8 @@ import Home from "./Home/Home.screen";
 import Map from "./Map/Map.screen";
 import Details from "./Details/Details.screen";
 import Account from "./Account/Account.screen";
+import MainScene from './Vr/MainScene/MainScene.screen';
+import MainArScene from './Ar/MainScene/MainScene';
 
 export {
     Splash,
@@ -15,5 +17,7 @@ export {
     Home,
     Map,
     Details,
-    Account
+    Account,
+    MainScene,
+    MainArScene
 }
