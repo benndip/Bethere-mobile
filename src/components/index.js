@@ -9,6 +9,7 @@ import MapPlaceType from "./MapPlaceType/MapPlaceType.component";
 import ImageBoard from './ImageBoard/ImageBoard.component';
 import Map from './Map/Map.component';
 import AutoNavigation from "./AutoNavigation/AutoNavigation.component";
+import Search from "./Search/Search.component";
 
 export {
     FormButton,
@@ -21,5 +22,6 @@ export {
     MapPlaceType,
     ImageBoard,
     Map,
-    AutoNavigation
+    AutoNavigation,
+    Search
 }

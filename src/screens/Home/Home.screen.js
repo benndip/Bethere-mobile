@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, Image, FlatList, Dimensions } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import styles from './Home.style';
-import { FocusAwareStatusBar, PlacetypeCard, PlaceCard } from '../../components';
+import { FocusAwareStatusBar, PlacetypeCard, PlaceCard, Search } from '../../components';
 import { placetypes, places } from '../../../assets/data';
+
+const { height } = Dimensions.get('screen');
+
+const TO_HEIGHT = height * 0.35
 
 const Home = ({ navigation }) => {
 
@@ -85,6 +89,7 @@ const Home = ({ navigation }) => {
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
       />
+      <Search toHeight={TO_HEIGHT} />
     </View>
   )
 }

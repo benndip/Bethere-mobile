@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, TouchableOpacity, Platform, FlatList } from 'react-native';
-import { FocusAwareStatusBar, MapPlace, MapPlaceType } from '../../components';
+import { View, TouchableOpacity, Platform, FlatList, Dimensions } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MapboxGL from "@react-native-mapbox-gl/maps";
 
 import styles from './Map.style';
 
+import { FocusAwareStatusBar, MapPlace, MapPlaceType, Search } from '../../components';
 import { places, placetypes } from '../../../assets/data';
 
 MapboxGL.setAccessToken("pk.eyJ1IjoiYmVubmRpcCIsImEiOiJjbDN2OXFsZnQwaXdxM2lwaWlnbjhpOTF2In0.gM_r3V8ooTJficCmGqVgIg");
 
+const { height } = Dimensions.get('screen');
+
+const TO_HEIGHT = height * 0.41
 
 const Map = ({ navigation }) => {
 
@@ -45,7 +48,7 @@ const Map = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <FocusAwareStatusBar barStyle='dark-content' translucent backgroundColor='transparent' />
-            <TouchableOpacity onPress={()=>navigation.navigate('Home')} style={styles.backArrowContainer}>
+            <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.backArrowContainer}>
                 <Ionicons name='chevron-back-sharp' color='#ffffff' size={20} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.filterContainer}>
@@ -80,6 +83,7 @@ const Map = ({ navigation }) => {
                         showsUserHeadingIndicator={true}
                     />
                 </MapboxGL.MapView>
+                <Search toHeight={TO_HEIGHT} />
             </View>
             {
                 showPlaces

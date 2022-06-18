@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     },
     placesScroll: {
         position: 'absolute',
-        bottom: 50,
+        bottom: 100,
         width: '100%',
         paddingVertical: 5
     },
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     },
     placeTypesScroll: {
         position: 'absolute',
-        top: 0.15 * height,
+        top: 0.11 * height,
         width: 0.35 * width,
         paddingVertical: 5,
         right: 20,
