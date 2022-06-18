@@ -69,6 +69,14 @@ const styles = StyleSheet.create({
     ratingText: {
         fontSize: 12,
         fontWeight: 'bold'
+    },
+    vr_ar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        alignSelf: 'flex-end',
+        width: 100,
+        justifyContent: 'space-between',
+        margin: 10
     }
 });
 

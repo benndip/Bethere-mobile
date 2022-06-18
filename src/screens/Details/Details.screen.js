@@ -5,6 +5,7 @@ import ImageViewer from 'react-native-image-zoom-viewer';
 import styles from './Details.style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { FocusAwareStatusBar, ImageBoard, Map, AutoNavigation } from '../../components';
 import { item_images } from '../../../assets/data';
@@ -13,7 +14,7 @@ const { height } = Dimensions.get('screen');
 
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
-const Details = ({ route }) => {
+const Details = ({ route, navigation }) => {
 
   // const { id, item_images, name, description, location, user, price, category_id } = route.params.item
 
@@ -88,6 +89,10 @@ const Details = ({ route }) => {
           </TouchableOpacity>
         </View>
         <Text style={styles.details}>This is the first palace of Ozin and also the best that we can have here. This can just be the best thing that we could do so that we have our being. But I am not saying anything. He</Text>
+        <View style={styles.vr_ar}>
+          <MaterialCommunityIcons name='virtual-reality' color='#ff6b81' size={45} onPress={() => navigation.navigate('MainScene')} />
+          <MaterialCommunityIcons name='augmented-reality' color='#f6b93b' size={45} onPress={() => navigation.navigate('MainArScene')} />
+        </View>
         <View style={styles.mapContainer}>
           <AnimatedTouchable
             onPress={() => scrollViewRef.current.scrollTo({ x: 0, y: 0, animated: true })}

@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get('screen')
 
 const styles = StyleSheet.create({
     container: {
-        height: width,
+        height: 0.8 * width,
         width: width,
         alignSelf: 'stretch',
         resizeMode: 'cover',

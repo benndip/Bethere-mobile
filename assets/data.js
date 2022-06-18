@@ -43,6 +43,11 @@ export const placetypes = [
         id: 9,
         name: 'Restaurants',
         icon: require('./images/restaurants.png')
+    },
+    {
+        id: 9,
+        name: 'Churches',
+        icon: require('./images/churches.png')
     }
 
 ];
