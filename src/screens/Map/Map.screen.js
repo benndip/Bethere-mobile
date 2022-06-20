@@ -43,12 +43,12 @@ const Map = ({ navigation }) => {
             setIsAndroidPermissionGranted(isGranted);
             setIsFetchingAndroidPermission(false);
         };
-    }, []);
+    },[]);
 
     return (
         <View style={styles.container}>
             <FocusAwareStatusBar barStyle='dark-content' translucent backgroundColor='transparent' />
-            <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.backArrowContainer}>
+            <TouchableOpacity onPress={() => navigation.goBack() } style={styles.backArrowContainer}>
                 <Ionicons name='chevron-back-sharp' color='#ffffff' size={20} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.filterContainer}>

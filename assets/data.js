@@ -138,4 +138,55 @@ export const item_images = [
         id: 3,
         url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVfNQ4vVjgx0cbuZ4kblKMMBiYdjSt2PltyZ_-eVup4h187rDqoLMbmH-J4KvdwnW9Hw&usqp=CAU'
     }
-]
+];
+
+export const news_data = [
+    {
+        id: 1,
+        title: 'This is a dummy title, you can\'t take it to heart.',
+        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcvvbfBMnS3UdHT4osaGJvvX3c7GevveRXQQ&usqp=CAU',
+        type: 'Sports',
+        created_at: '20 days ago'
+    },
+    {
+        id: 2,
+        title: 'This is a dummy title, you can\'t take it to heart.',
+        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoa5A3ADVasy9TiQJVFAaYg0kn1ccW2d1Low&usqp=CAU',
+        type: 'Nature',
+        created_at: '20 days ago'
+    },
+    {
+        id: 3,
+        title: 'This is a dummy title, you can\'t take it to heart.',
+        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQk46O18xMUGBwS-DSV-3zk2RJmE1WfPoTuwg&usqp=CAU',
+        type: 'International',
+        created_at: '20 days ago'
+    },
+    {
+        id: 4,
+        title: 'This is a dummy title, you can\'t take it to heart.',
+        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcOPTFUukS85YMk_ZeuKPD1vrCPz5_wsr1KQ&usqp=CAU',
+        type: 'Breaking',
+        created_at: '20 days ago'
+    },
+    {
+        id: 5,
+        title: 'This is a dummy title, you can\'t take it to heart.',
+        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW9LOUNwRv2bpYyXfF9162dOHHW8_QIglXCg&usqp=CAU',
+        type: 'Insecurity',
+        created_at: '20 days ago'
+    },
+    {
+        id: 6,
+        title: 'This is a dummy title, you can\'t take it to heart.',
+        description: 'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available.',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl6I8OOh8SrtDIUuuiTrbMrk5YgtQhGaoUlw&usqp=CAU',
+        type: 'Sports',
+        created_at: '20 days ago'
+    }
+];

@@ -4,6 +4,7 @@ import Svg, { Path } from 'react-native-svg';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import styles from './Home.style';
+import theme from '../../theme';
 import { FocusAwareStatusBar, PlacetypeCard, PlaceCard, Search } from '../../components';
 import { placetypes, places } from '../../../assets/data';
 
@@ -18,7 +19,7 @@ const Home = ({ navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <PlaceCard item={item} />
+      <PlaceCard item={item} onPress={() => navigation.navigate('Details')} />
     )
   }
 
@@ -40,7 +41,7 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <FocusAwareStatusBar barStyle='dark-content' translucent backgroundColor='transparent' />
+      <FocusAwareStatusBar barStyle='light-content' translucent backgroundColor={theme.PRIMARY_COLOR} />
 
       {/* Top view */}
       <View style={styles.topView}>
@@ -62,9 +63,9 @@ const Home = ({ navigation }) => {
             <Text style={styles.locationText}>Depansar, Bali</Text>
           </View>
         </View>
-        <View style={styles.avatarContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate('Account')} style={styles.avatarContainer}>
           <Image source={require('../../../assets/images/avatar.png')} style={styles.avatarImage} />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <FlatList
