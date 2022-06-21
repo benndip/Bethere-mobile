@@ -6301,6 +6301,11 @@ react-native-screens@^3.13.1:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
+react-native-share@^7.6.2:
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/react-native-share/-/react-native-share-7.6.2.tgz#7a1edf2226109b0a0aeaeefef3f8f7b119508a96"
+  integrity sha512-8Dv0ZqqW3rSzQxi9MoxXreRU65xizGVhrS2xoXfKJrgx9cI0jCAUao7B6CSZdB1exr6ZLFpi56pJ7t1Fp++d1A==
+
 react-native-svg@^12.3.0:
   version "12.3.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.3.0.tgz#40f657c5d1ee366df23f3ec8dae76fd276b86248"
@@ -6313,6 +6318,11 @@ react-native-system-navigation-bar@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/react-native-system-navigation-bar/-/react-native-system-navigation-bar-1.0.5.tgz#3a203ecab5a99f6112ad2bd80c25be8e602228cf"
   integrity sha512-Xfp/S1lIIQODEmMe84vlGIMaQROhiMDM9TrhrgpTLAmjWLkCvjRHcjwpk3De2JNWObS+o3DVBvSNUUaVnFj8cg==
+
+react-native-tts@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-tts/-/react-native-tts-4.1.0.tgz#05fa34492bec234bcd64f6ed2bf122c4667d141a"
+  integrity sha512-tvf3lQ6u9MqztUie37qoPw5YQPqi0ql1lPhDsBBs/RRA6A/H1J9X9H/qb1A0Hx0ZpjavrEdtVSqQQ2JDZvZCTQ==
 
 react-native-vector-icons@^9.1.0:
   version "9.1.0"

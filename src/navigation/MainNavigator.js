@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text } from 'react-native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { Splash, Login, Signup, Landing, Home, Map, Details, Account, MainScene, MainArScene, News } from '../screens';
+import { Splash, Login, Signup, Landing, Home, Map, Details, Account, MainScene, MainArScene, News, Payment } from '../screens';
 import DrawerNavigation from './DrawerNavigation';
 
 const Stack = createNativeStackNavigator();
@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator();
 const MainNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="DrawerNavigation"
+      initialRouteName="Payment"
       screenOptions={{
         headerShown: false,
       }}
@@ -27,6 +27,7 @@ const MainNavigator = () => {
       <Stack.Screen name='MainScene' component={MainScene} />
       <Stack.Screen name='MainArScene' component={MainArScene} />
       <Stack.Screen name='News' component={News} />
+      <Stack.Screen name='Payment' component={Payment} />
     </Stack.Navigator>
   )
 }

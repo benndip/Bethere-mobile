@@ -67,5 +67,23 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: 'rgba(236, 240, 241,1)',
   },
+  coinsText: {
+    fontSize: 40,
+    marginHorizontal: 10,
+    color: '#535c68'
+  },
+  coinIcon:{
+    // alignSelf: 'flex-end'
+  },
+  coinsContainer: {
+    width: '100%',
+    height: 55,
+    flexDirection: 'row',
+    alignItems:'flex-end',
+    // borderWidth: 1,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 50
+  }
 });
 export default styles

@@ -10,6 +10,7 @@ import MainScene from './Vr/MainScene/MainScene.screen';
 import MainArScene from './Ar/MainScene/MainScene';
 import News from "./News/News.screen";
 import DrawerContent from './DrawerContent/DrawerContent';
+import Payment from "./Payment/Payment.screen";
 
 export {
     Splash,
@@ -23,5 +24,6 @@ export {
     MainScene,
     MainArScene,
     News,
-    DrawerContent
+    DrawerContent,
+    Payment
 }
