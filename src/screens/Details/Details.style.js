@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         height: height,
         width: '100%',
         alignSelf: 'center',
-        marginVertical: 20
+        marginTop: 20
     },
     scrollToBottomView: {
         width: 60,

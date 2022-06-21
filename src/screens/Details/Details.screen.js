@@ -101,8 +101,7 @@ const Details = ({ route, navigation }) => {
             <AntDesign name='down' size={30} color='#ffffff' />
           </AnimatedTouchable>
           <Map
-            centerCoordinate={[4, 9]}
-            placeLocation={[9, 4]}
+            placeLocation={[4.6, 7.2]}
           />
         </View>
       </Animated.ScrollView>
