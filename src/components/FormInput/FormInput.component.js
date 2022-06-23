@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {View, TextInput} from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
 import styles from './FormInput.style';
 
-const FormInput = ({labelValue, placeholderText, iconType, secureTextEntry, passwordInput, ...rest}) => {
+const FormInput = ({ labelValue, placeholderText, iconType, secureTextEntry, passwordInput, ...rest }) => {
 
   const [textEntry, SetTextEntry] = useState(true)
 
@@ -20,16 +20,16 @@ const FormInput = ({labelValue, placeholderText, iconType, secureTextEntry, pass
         numberOfLines={1}
         placeholder={placeholderText}
         placeholderTextColor="#666"
-        secureTextEntry={textEntry}
+        secureTextEntry={passwordInput ? textEntry : null}
         {...rest}
       />
       {
         passwordInput &&
         <Feather
           name={textEntry ? 'eye' : 'eye-off'}
-          size={25} 
+          size={25}
           color="#666"
-          onPress={()=>SetTextEntry(!textEntry)}
+          onPress={() => SetTextEntry(!textEntry)}
           style={{ position: 'absolute', right: 15, zIndex: 999999 }}
         />
       }

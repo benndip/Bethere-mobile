@@ -56,7 +56,7 @@ export const places = [
     {
         id: 1,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/mountain.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali',
         minutes: 45,
@@ -65,7 +65,7 @@ export const places = [
     {
         id: 2,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/waterfal.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali',
         minutes: 45,
@@ -74,14 +74,14 @@ export const places = [
     {
         id: 3,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/cave.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali'
     },
     {
         id: 4,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/hut.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali',
         minutes: 45,
@@ -90,7 +90,7 @@ export const places = [
     {
         id: 5,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/culture.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali',
         minutes: 45,
@@ -99,7 +99,7 @@ export const places = [
     {
         id: 6,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/statue.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali',
         minutes: 45,
@@ -108,7 +108,7 @@ export const places = [
     {
         id: 7,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/palace.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali',
         minutes: 45,
@@ -117,7 +117,7 @@ export const places = [
     {
         id: 8,
         name: 'Nuesa Pedia',
-        image: require('./images/avatar.png'),
+        image: require('../assets/images/waterfall1.jpeg'),
         details: 'This is the biggest whatever in the world okay ? so please try and make sure you check it out',
         location: 'Netueo, Bali',
         minutes: 45,
@@ -128,15 +128,15 @@ export const places = [
 export const item_images = [
     {
         id: 1,
-        url: 'https://www.planetware.com/wpimages/2021/10/world-tourist-attractions-eiffel-tower-flowers-spring.jpg',
+        url: require('../assets/images/waterfal.jpeg'),
     },
     {
         id: 2,
-        url: 'https://images.unsplash.com/photo-1610981109245-c3f748c98ad2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHRvdXJpc3QlMjBhdHRyYWN0aW9ufGVufDB8fDB8fA%3D%3D&w=1000&q=80',
+        url: require('../assets/images/waterfall1.jpeg'),
     },
     {
         id: 3,
-        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPVfNQ4vVjgx0cbuZ4kblKMMBiYdjSt2PltyZ_-eVup4h187rDqoLMbmH-J4KvdwnW9Hw&usqp=CAU'
+        url: require('../assets/images/waterfall2.jpeg')
     }
 ];
 

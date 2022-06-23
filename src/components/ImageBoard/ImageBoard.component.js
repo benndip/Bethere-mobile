@@ -13,9 +13,8 @@ const ImageBoard = ({ item_images, onImagePress }) => {
                     {item_images.map((itemImg) => (
                         <Pressable key={itemImg.id} onPress={() => onImagePress(itemImg)} style={styles.largerView}>
                             <Image
-                                source={{ uri: itemImg.url }}
+                                source={itemImg.url}
                                 style={styles.image}
-
                             />
                         </Pressable>
                     ))}
@@ -29,7 +28,7 @@ const ImageBoard = ({ item_images, onImagePress }) => {
                     {item_images.map((itemImg) => (
                         <Pressable onPress={() => onImagePress(itemImg)} style={styles.largerView} key={itemImg.id}>
                             <Image
-                                source={{ uri: itemImg.url }}
+                                source={itemImg.url}
                                 style={styles.image}
                             />
                         </Pressable>
@@ -45,7 +44,7 @@ const ImageBoard = ({ item_images, onImagePress }) => {
                 <View style={styles.container}>
                     <Pressable onPress={() => onImagePress(firstImage)} style={styles.largerView}>
                         <Image
-                            source={{ uri: firstImage.url }}
+                            source={firstImage.url }
                             style={styles.image}
                         />
                     </Pressable>
@@ -57,7 +56,7 @@ const ImageBoard = ({ item_images, onImagePress }) => {
                                 key={itemImg.id}
                             >
                                 <Image
-                                    source={{ uri: itemImg.url }}
+                                    source={itemImg.url}
                                     style={styles.image}
                                 />
                             </Pressable>

@@ -1,9 +1,8 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f9fafd',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
@@ -50,13 +49,13 @@ const styles = StyleSheet.create({
     paddingVertical: 0,
   },
   buttonAndText: {
-    width: '48%',
+    width: '49%',
     borderWidth: 1,
     borderColor: '#ccc',
     height: '95%',
     borderRadius: 8,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   datePickerTouch: {
     width: '100%',
