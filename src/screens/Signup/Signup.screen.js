@@ -22,7 +22,7 @@ const Signup = ({navigation}) => {
   const phoneInput = useRef(null);
 
   const [name, setName] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState('Cameroon');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -68,8 +68,6 @@ const Signup = ({navigation}) => {
       password_confirmation: confirmPassword,
       date_of_birth: dateOfBirth,
     };
-
-    // console.log(userData);
 
     axois
       .post('/register', userData)
@@ -164,7 +162,7 @@ const Signup = ({navigation}) => {
         <PhoneInput
           ref={phoneInput}
           defaultValue={phone}
-          defaultCode="IN"
+          defaultCode="CM"
           layout="first"
           withShadow={false}
           containerStyle={styles.phoneContainer}
