@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -7,7 +8,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 40,
     backgroundColor: '#ffffff',
-    flex: 1
+    flex: 1,
   },
   logo: {
     height: 150,
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5',
+    color: theme.PRIMARY_COLOR,
     fontFamily: 'Lato-Regular',
   },
   phoneContainer: {

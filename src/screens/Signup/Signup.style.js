@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +20,7 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: '500',
-    color: '#2e64e5',
+    color: theme.PRIMARY_COLOR,
     fontFamily: 'Lato-Regular',
   },
   textPrivate: {

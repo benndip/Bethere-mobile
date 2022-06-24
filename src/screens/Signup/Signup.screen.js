@@ -15,8 +15,14 @@ import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
 import axois from '../../axios/axios';
 
 import styles from './Signup.style';
+import theme from '../../theme';
 
-import {FormInput, FormButton, FocusAwareStatusBar} from '../../components';
+import {
+  FormInput,
+  FormButton,
+  FocusAwareStatusBar,
+  BethereText,
+} from '../../components';
 
 const Signup = ({navigation}) => {
   const phoneInput = useRef(null);
@@ -108,16 +114,9 @@ const Signup = ({navigation}) => {
         keyboardShouldPersistTaps="always">
         <FocusAwareStatusBar
           barStyle="light-content"
-          backgroundColor="#2e64e5"
+          backgroundColor={theme.PRIMARY_COLOR}
         />
-        <Text style={styles.text}>
-          Welcome to{' '}
-          <Text style={{color: '#ff6b6b', fontWeight: 'bold', fontSize: 28}}>
-            Bethere
-          </Text>{' '}
-          🔥
-        </Text>
-
+        <BethereText />
         <FormInput
           labelValue={name}
           onChangeText={name => setName(name)}

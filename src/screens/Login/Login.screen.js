@@ -14,7 +14,13 @@ import axois from '../../axios/axios';
 
 import styles from './Login.style';
 
-import {FormInput, FocusAwareStatusBar, FormButton} from '../../components';
+import {
+  FormInput,
+  FocusAwareStatusBar,
+  FormButton,
+  BethereText,
+} from '../../components';
+import theme from '../../theme';
 
 const Login = ({navigation}) => {
   const phoneInput = useRef(null);
@@ -46,21 +52,15 @@ const Login = ({navigation}) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <FocusAwareStatusBar barStyle="light-content" backgroundColor="#2e64e5" />
+      <FocusAwareStatusBar
+        barStyle="light-content"
+        backgroundColor={theme.PRIMARY_COLOR}
+      />
       <Image
         source={require('../../../assets/images/auth.png')}
         style={styles.logo}
       />
-      <Text
-        style={{
-          color: '#ff6b6b',
-          fontWeight: 'bold',
-          fontSize: 28,
-          marginVertical: 20,
-        }}>
-        Bethere
-      </Text>
-
+      <BethereText />
       <PhoneInput
         ref={phoneInput}
         defaultValue={phone}

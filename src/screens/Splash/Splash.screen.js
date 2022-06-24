@@ -3,23 +3,15 @@ import {View, Text, Image, StatusBar} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
-  withTiming,
   withSpring,
 } from 'react-native-reanimated';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {setUser, setToken} from '../../redux/slices/auth';
+import {BethereText} from '../../components';
 
 import styles from './Splash.style';
 
 const Splash = ({navigation}) => {
-  const opacityValue = useSharedValue(0);
   const bottomValue = useSharedValue(0);
-
-  const bethereTextAnimatedStyles = useAnimatedStyle(() => {
-    return {
-      opacity: opacityValue.value,
-    };
-  });
 
   const belowTextAnimatedStyles = useAnimatedStyle(() => {
     return {
@@ -50,7 +42,6 @@ const Splash = ({navigation}) => {
   };
 
   useEffect(() => {
-    opacityValue.value = withTiming(1, {duration: 2000});
     bottomValue.value = withSpring(10);
     setTimeout(() => {
       checkRouteToGo(); // run this  2 seconds later so we wait for animation to complete.
@@ -64,10 +55,7 @@ const Splash = ({navigation}) => {
         source={require('../../../assets/images/splash.png')}
         style={styles.image}
       />
-      <Animated.Text style={[styles.bethereText, bethereTextAnimatedStyles]}>
-        Be<Text style={{color: '#6C63FF'}}>there</Text>{' '}
-        <Text style={{color: '#FF6584'}}>!</Text>{' '}
-      </Animated.Text>
+      <BethereText />
       <Animated.Text style={[styles.belowText, belowTextAnimatedStyles]}>
         From{' '}
         <Text style={{fontSize: 22, color: '#FF6584', fontWeight: 'bold'}}>
