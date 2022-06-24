@@ -28,9 +28,19 @@ const authSlice = createSlice({
       }
       state.token = action.payload;
     },
+    removeUserAndToken: async state => {
+      const keys = ['USER', 'TOKEN'];
+      try {
+        await AsyncStorage.multiRemove(keys);
+      } catch (e) {
+        console.log('Could not remove from storage');
+      }
+      state.user = null;
+      state.token = null;
+    },
   },
 });
 
-export const {setUser, setToken} = authSlice.actions;
+export const {setUser, setToken, removeUserAndToken} = authSlice.actions;
 
 export default authSlice.reducer;
