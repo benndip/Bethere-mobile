@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Dimensions,
+  Alert,
 } from 'react-native';
 import PhoneInput from 'react-native-phone-number-input';
 import {RadioButton} from 'react-native-paper';
@@ -16,6 +17,7 @@ import axois from '../../axios/axios';
 
 import styles from './Signup.style';
 import theme from '../../theme';
+import {setUser, setToken} from '../../redux/slices/auth';
 
 import {
   FormInput,
@@ -35,6 +37,7 @@ const Signup = ({navigation}) => {
   const [gender, setGender] = useState('M');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [hasError, setHasError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const showToastWithGravityAndOffset = message => {
     ToastAndroid.showWithGravityAndOffset(
@@ -47,6 +50,7 @@ const Signup = ({navigation}) => {
   };
 
   const registerUser = async () => {
+    setLoading(true);
     if (
       name.length < 3 ||
       phone.length < 3 ||
@@ -78,10 +82,23 @@ const Signup = ({navigation}) => {
     axois
       .post('/register', userData)
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data.user);
+        setUser(res.data.user);
+        setToken(res.data.token);
       })
-      .catch(err => {
-        console.log(err.message);
+      .catch(error => {
+        if (error.response) {
+          Alert.alert('Signup Error', error.response.data.message, [
+            {text: 'OKAY', onPress: () => console.log('OK Pressed')},
+          ]);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 

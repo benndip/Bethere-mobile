@@ -1,11 +1,11 @@
 import React, {useState, useRef} from 'react';
 import {
-  View,
   Text,
   TouchableOpacity,
   Image,
-  Platform,
   ScrollView,
+  ToastAndroid,
+  Alert,
 } from 'react-native';
 
 import PhoneInput from 'react-native-phone-number-input';
@@ -13,6 +13,7 @@ import PhoneInput from 'react-native-phone-number-input';
 import axois from '../../axios/axios';
 
 import styles from './Login.style';
+import {setUser, setToken} from '../../redux/slices/auth';
 
 import {
   FormInput,
@@ -27,8 +28,21 @@ const Login = ({navigation}) => {
 
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [hasError, setHasError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const showToastWithGravityAndOffset = message => {
+    ToastAndroid.showWithGravityAndOffset(
+      message,
+      ToastAndroid.LONG,
+      ToastAndroid.BOTTOM,
+      25,
+      50,
+    );
+  };
 
   const login = () => {
+    setLoading(true);
     if (phone.length < 3 || password.length < 0) {
       setHasError(true);
       showToastWithGravityAndOffset('All Input fields must be filled');
@@ -43,10 +57,23 @@ const Login = ({navigation}) => {
     axois
       .post('/login', userData)
       .then(res => {
-        console.log(res.data);
+        console.log(res.data.user);
+        setUser(res.data.user);
+        setToken(res.data.token);
       })
-      .catch(err => {
-        console.log(err.message);
+      .catch(error => {
+        if (error.response) {
+          Alert.alert('Signup Error', error.response.data.message, [
+            {text: 'OKAY', onPress: () => console.log('OK Pressed')},
+          ]);
+        } else if (error.request) {
+          console.log(error.request);
+        } else {
+          console.log(error.message);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
