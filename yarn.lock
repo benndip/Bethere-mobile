@@ -1390,6 +1390,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-plugin/-/eslint-plugin-1.2.0.tgz#7d6d789ae8edf73dc9bed1246cd48277edea8066"
   integrity sha512-o6aam+0Ug1xGK3ABYmBm0B1YuEKfM/5kaoZO0eHbZwSpw9UzDX4G5y4Nx/K20FHqUmJHkZmLvOUFYwN4N+HqKA==
 
+"@react-native-community/slider@^4.2.3":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-4.2.3.tgz#7ed4f00ca2c50c666c47a59205b3df031d2588eb"
+  integrity sha512-qPkrAy883tSPoRWgGZjqL5tYnd4AmNLYNtjvtD9G6JMYtImxK4ITa/W8zOEgR8UOrPde/t+VN0MMxL63HZZK1Q==
+
 "@react-native-mapbox-gl/maps@^8.6.0-beta.0":
   version "8.6.0-beta.0"
   resolved "https://registry.yarnpkg.com/@react-native-mapbox-gl/maps/-/maps-8.6.0-beta.0.tgz#e202c94c1bfae2516d5e5728ad37e398d534617e"

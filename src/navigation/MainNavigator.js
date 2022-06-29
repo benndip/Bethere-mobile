@@ -23,7 +23,7 @@ const Stack = createNativeStackNavigator();
 const MainNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Spalsh"
+      initialRouteName="Details"
       screenOptions={{
         headerShown: false,
       }}>
