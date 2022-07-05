@@ -1,5 +1,4 @@
 import {configureStore} from '@reduxjs/toolkit';
-import {combineReducers} from 'redux';
 
 import rootReducer from './slices/rootReducer';
 

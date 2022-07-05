@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
   user: null,
@@ -11,30 +10,35 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setUser: async (state, action) => {
-      try {
-        const jsonValue = JSON.stringify(action.payload);
-        await AsyncStorage.setItem('USER', jsonValue);
-      } catch (e) {
-        console.log('Could not save to storage');
-      }
-      state.user = action.payload;
+      storage.save({
+        key: 'USER',
+        data: action.payload,
+        expires: 1000 * 3600 * 24 * 365,
+      });
+      return {
+        ...state,
+        user: action.payload,
+      };
     },
     setToken: async (state, action) => {
-      try {
-        const jsonValue = JSON.stringify(action.payload);
-        await AsyncStorage.setItem('TOKEN', jsonValue);
-      } catch (e) {
-        console.log('Could not save to storage');
-      }
-      state.token = action.payload;
+      storage.save({
+        key: 'TOKEN',
+        data: action.payload,
+        expires: 1000 * 3600 * 24 * 365,
+      });
+      return {
+        ...state,
+        token: action.payload,
+      };
     },
     removeUserAndToken: async state => {
       const keys = ['USER', 'TOKEN'];
-      try {
-        await AsyncStorage.multiRemove(keys);
-      } catch (e) {
-        console.log('Could not remove from storage');
-      }
+      storage.remove({
+        key: keys[0],
+      });
+      storage.remove({
+        key: keys[1],
+      });
       state.user = null;
       state.token = null;
     },

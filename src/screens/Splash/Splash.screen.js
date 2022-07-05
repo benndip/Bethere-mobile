@@ -23,10 +23,10 @@ const Splash = ({navigation}) => {
     try {
       const notFirstTime = await storage.load({key: 'NOTFIRSTTIME'});
       try {
-        const user = await storage.load({key: 'USER'});
         const token = await storage.load({key: 'TOKEN'});
-        setUser(user);
+        const user = await storage.load({key: 'USER'});
         setToken(token);
+        setUser(user);
         navigation.navigate('DrawerNavigation');
       } catch (error) {
         navigation.navigate('Landing');

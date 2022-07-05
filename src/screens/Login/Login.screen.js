@@ -6,7 +6,9 @@ import {
   ScrollView,
   ToastAndroid,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 
 import PhoneInput from 'react-native-phone-number-input';
 
@@ -25,6 +27,8 @@ import theme from '../../theme';
 
 const Login = ({navigation}) => {
   const phoneInput = useRef(null);
+
+  const dispatch = useDispatch();
 
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -57,17 +61,38 @@ const Login = ({navigation}) => {
     axois
       .post('/login', userData)
       .then(res => {
-        console.log(res.data.user);
-        setUser(res.data.user);
-        setToken(res.data.token);
+        const {status, data} = res;
+        // console.log(res);
+        if (status == 200) {
+          dispatch(setUser(data.user));
+          dispatch(setToken(data.token));
+          Alert.alert(
+            '✨ Login successful ✨',
+            'Welcome to Bethere, where the world is made known ',
+            [
+              {
+                text: 'Hurray!!!',
+                onPress: () => navigation.navigate('DrawerNavigation'),
+              },
+            ],
+            {
+              cancelable: false,
+            },
+          );
+        }
       })
       .catch(error => {
         if (error.response) {
-          Alert.alert('Signup Error', error.response.data.message, [
-            {text: 'OKAY', onPress: () => console.log('OK Pressed')},
-          ]);
+          const {status, data} = error.response;
+          console.log(data.message);
+          Alert.alert('❌ Login Error ❌', data.message, [{text: 'OKAY'}]);
         } else if (error.request) {
           console.log(error.request);
+          Alert.alert(
+            'No internet',
+            'Please check your internet connection and try again',
+            [{text: 'OKAY'}],
+          );
         } else {
           console.log(error.message);
         }
@@ -78,7 +103,9 @@ const Login = ({navigation}) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      keyboardShouldPersistTaps="always">
       <FocusAwareStatusBar
         barStyle="light-content"
         backgroundColor={theme.PRIMARY_COLOR}
@@ -108,7 +135,11 @@ const Login = ({navigation}) => {
         passwordInput
       />
 
-      <FormButton buttonTitle="Sign In" onPress={login} />
+      {loading ? (
+        <ActivityIndicator size={'large'} color="red" />
+      ) : (
+        <FormButton buttonTitle="Sign In" onPress={login} />
+      )}
 
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
