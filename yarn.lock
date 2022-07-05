@@ -1197,6 +1197,13 @@
   dependencies:
     serve-static "^1.13.1"
 
+"@react-native-community/cli-debugger-ui@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-8.0.0.tgz#98263dc525e65015e2d6392c940114028f87e8e9"
+  integrity sha512-u2jq06GZwZ9sRERzd9FIgpW6yv4YOW4zz7Ym/B8eSzviLmy3yI/8mxJtvlGW+J8lBsfMcQoqJpqI6Rl1nZy9yQ==
+  dependencies:
+    serve-static "^1.13.1"
+
 "@react-native-community/cli-hermes@^6.3.0":
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-hermes/-/cli-hermes-6.3.0.tgz#92b2f07d08626a60f6893c3e3d57c1538c8fb5a7"

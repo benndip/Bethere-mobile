@@ -5,6 +5,7 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import {useDispatch} from 'react-redux';
 import {setUser, setToken} from '../../redux/slices/auth';
 import {BethereText} from '../../components';
 
@@ -19,14 +20,16 @@ const Splash = ({navigation}) => {
     };
   });
 
+  const dispatch = useDispatch();
+
   const checkRouteToGo = async () => {
     try {
       const notFirstTime = await storage.load({key: 'NOTFIRSTTIME'});
       try {
         const token = await storage.load({key: 'TOKEN'});
         const user = await storage.load({key: 'USER'});
-        setToken(token);
-        setUser(user);
+        dispatch(setToken(token));
+        dispatch(setUser(user));
         navigation.navigate('DrawerNavigation');
       } catch (error) {
         navigation.navigate('Landing');

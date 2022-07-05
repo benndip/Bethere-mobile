@@ -28,20 +28,12 @@ export default function App() {
   const navigationRef = useRef();
 
   const backAction = () => {
-    if (navigationRef.current.getCurrentRoute().name === 'InterestHome') {
-      navigationRef.current?.navigate('Feed');
-      return true;
-    }
-    if (navigationRef.current.getCurrentRoute().name === 'AllInterests') {
-      navigationRef.current?.navigate('InterestHome');
-      return true;
-    }
     if (navigationRef.current.getCurrentRoute().name === 'Home') {
       if (clicks > 0) {
         BackHandler.exitApp();
       } else {
         ToastAndroid.show(
-          'click again to exit BackMarché',
+          'click again to exit Bethere',
           ToastAndroid.SHORT,
           ToastAndroid.CENTER,
         );
@@ -59,10 +51,15 @@ export default function App() {
     const init = async () => {
       BackHandler.addEventListener('hardwareBackPress', backAction);
     };
+    init();
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() =>
+        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
+      }>
       <MainNavigator />
     </NavigationContainer>
   );

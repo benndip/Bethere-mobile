@@ -9,7 +9,7 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: async (state, action) => {
+    setUser: (state, action) => {
       storage.save({
         key: 'USER',
         data: action.payload,
@@ -20,7 +20,7 @@ const authSlice = createSlice({
         user: action.payload,
       };
     },
-    setToken: async (state, action) => {
+    setToken: (state, action) => {
       storage.save({
         key: 'TOKEN',
         data: action.payload,
@@ -31,7 +31,7 @@ const authSlice = createSlice({
         token: action.payload,
       };
     },
-    removeUserAndToken: async state => {
+    removeUserAndToken: state => {
       const keys = ['USER', 'TOKEN'];
       storage.remove({
         key: keys[0],
@@ -39,8 +39,11 @@ const authSlice = createSlice({
       storage.remove({
         key: keys[1],
       });
-      state.user = null;
-      state.token = null;
+      return {
+        ...state,
+        user: null,
+        token: null,
+      };
     },
   },
 });

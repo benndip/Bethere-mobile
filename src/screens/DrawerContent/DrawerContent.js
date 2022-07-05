@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   Avatar,
   Title,
@@ -16,8 +16,7 @@ import {
   UIManager,
   LayoutAnimation,
 } from 'react-native';
-// import Share from 'react-native-share';
-// import OneSignal from 'react-native-onesignal';
+import {useSelector, useDispatch} from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -25,17 +24,16 @@ import Feather from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Share from 'react-native-share';
-
-// import {AvatarAbrev} from '../../components';
 
 import styles from './DrawerContent.style';
 
-// import * as actions from '../../redux/actions/actions';
 import theme from '../../theme';
+import axios from '../../axios/axios';
+import {removeUserAndToken} from '../../redux/slices/auth';
 
 //For the layout animation
 if (Platform.OS === 'android') {
@@ -44,30 +42,21 @@ if (Platform.OS === 'android') {
   }
 }
 
-const DrawerContent = ({
-  setItemsToWishlist,
-  navigation,
-  i18n,
-  // changeLanguage,
-  setUser,
-  setToken,
-  token,
-  user,
-  ...props
-}) => {
-
+const DrawerContent = ({user, navigation, ...props}) => {
   const [selectLanguage, setSelectLanguage] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [currentLocale, setCurrentLocale] = useState('en');
 
-  const [currentLocale, setCurrentLocale] = useState('en')
+  const token = useSelector(state => state.auth.token);
+  const dispatch = useDispatch();
 
   const changeLanguage = () => {
-    setCurrentLocale(prev => prev == 'en' ? 'fr' : 'en');
-  }
+    setCurrentLocale(prev => (prev == 'en' ? 'fr' : 'en'));
+  };
 
   const myCustomShare = async () => {
-    let PLAYSTORE_LINK = ''
-    let WEB_URL = ''
+    let PLAYSTORE_LINK = '';
+    let WEB_URL = '';
     const shareOptions = {
       message: `😃 Hello checkout Bethere 🎉 on Playstore at ${PLAYSTORE_LINK} and make fast sales for free(100.7% free). We also have our web site at ${WEB_URL}`,
     };
@@ -80,12 +69,60 @@ const DrawerContent = ({
   };
 
   const logout = () => {
-
-  }
-
+    setLoading(true);
+    axios
+      .post(
+        '/logout',
+        {},
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+          },
+        },
+      )
+      .then(res => {
+        const {status, data} = res;
+        // console.log(res);
+        if (status == 200) {
+          dispatch(removeUserAndToken());
+          Alert.alert(
+            'Logout Successful',
+            'We are sad to see you leave, hope you stick around shortly ',
+            [
+              {
+                text: 'Leave!!!',
+                onPress: () => navigation.navigate('Landing'),
+              },
+            ],
+            {
+              cancelable: false,
+            },
+          );
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          const {status, data} = error.response;
+          console.log(data.message);
+          Alert.alert('❌ Log Error ❌', data.message, [{text: 'OKAY'}]);
+        } else if (error.request) {
+          console.log(error.request);
+          Alert.alert(
+            'No internet',
+            'Please check your internet connection and try again',
+            [{text: 'OKAY'}],
+          );
+        } else {
+          console.log(error.message);
+        }
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{flex: 1}}>
       <DrawerContentScrollView showsVerticalScrollIndicator={false} {...props}>
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
@@ -95,8 +132,13 @@ const DrawerContent = ({
                 marginTop: 15,
                 alignItems: 'center',
               }}>
-              <Avatar.Image size={80} source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReq8M0wYyhycFPq6Al7C2X_oXytHTKdTil9A&usqp=CAU' }} />
-              <View style={{ marginLeft: 15, flexDirection: 'column' }}>
+              <Avatar.Image
+                size={80}
+                source={{
+                  uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReq8M0wYyhycFPq6Al7C2X_oXytHTKdTil9A&usqp=CAU',
+                }}
+              />
+              <View style={{marginLeft: 15, flexDirection: 'column'}}>
                 {user ? (
                   <Title style={styles.title}>
                     {user.name.split(' ').splice(0, 1)[0]}
@@ -111,7 +153,7 @@ const DrawerContent = ({
 
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              icon={({ color, size }) => (
+              icon={({color, size}) => (
                 <Icon name="home-outline" color={color} size={size} />
               )}
               label={'Home'}
@@ -120,18 +162,18 @@ const DrawerContent = ({
               }}
             />
             <DrawerItem
-              icon={({ color, size }) => (
+              icon={({color, size}) => (
                 <Icon name="bell-outline" color={color} size={size} />
               )}
               label={'Places nearby'}
               onPress={() => navigation.navigate('Map')}
             />
             <DrawerItem
-              icon={({ color, size }) => (
+              icon={({color, size}) => (
                 <AntDesign name="message1" color={color} size={size} />
               )}
               label={'News'}
-              onPress={() => { }}
+              onPress={() => {}}
             />
           </Drawer.Section>
           <Drawer.Section title={'Preferences'}>
@@ -149,9 +191,9 @@ const DrawerContent = ({
               </View>
             </TouchableRipple>
             <TouchableRipple>
-              <View style={{ overflow: 'hidden' }}>
+              <View style={{overflow: 'hidden'}}>
                 <DrawerItem
-                  icon={({ color, size }) => (
+                  icon={({color, size}) => (
                     <FontAwesome name="language" size={23} />
                   )}
                   label={'Language'}
@@ -165,7 +207,7 @@ const DrawerContent = ({
                 <EvilIcons
                   name={`chevron-${selectLanguage ? 'down' : 'right'}`}
                   size={33}
-                  style={{ position: 'absolute', right: 18, top: 16 }}
+                  style={{position: 'absolute', right: 18, top: 16}}
                   onPress={() => {
                     LayoutAnimation.configureNext(
                       LayoutAnimation.Presets.spring,
@@ -228,7 +270,7 @@ const DrawerContent = ({
           </Drawer.Section>
           <Drawer.Section title={'Supprt'}>
             <TouchableRipple onPress={myCustomShare}>
-              <View style={{ ...styles.preference }}>
+              <View style={{...styles.preference}}>
                 <Text>Share the app</Text>
                 <View pointerEvents="none">
                   <Feather
@@ -243,7 +285,7 @@ const DrawerContent = ({
               onPress={() => {
                 navigation.navigate('Home');
               }}>
-              <View style={{ ...styles.preference }}>
+              <View style={{...styles.preference}}>
                 <Text>About us</Text>
                 <View pointerEvents="none">
                   <Ionicons
@@ -256,7 +298,12 @@ const DrawerContent = ({
             </TouchableRipple>
           </Drawer.Section>
           <View style={styles.coinsContainer}>
-            <FontAwesome5 name='coins' size={16} color='#f0932b' style={styles.coinIcon} />
+            <FontAwesome5
+              name="coins"
+              size={16}
+              color="#f0932b"
+              style={styles.coinIcon}
+            />
             <Text style={styles.coinsText}>2,300</Text>
             <Text>coins</Text>
           </View>
@@ -265,26 +312,26 @@ const DrawerContent = ({
 
       <Drawer.Section style={styles.bottomDrawerSection}>
         {loading ? (
-          <ActivityIndicator size={25} color="red" />
+          <ActivityIndicator size={25} color={theme.PRIMARY_COLOR} />
         ) : (
           <DrawerItem
             onPress={() =>
               Alert.alert(
-                `'phrases.log_out`,
-                `'phrases.sure_you_want_to_logout'`,
+                `Logout`,
+                `Are you sure you want to Logout ?`,
                 [
                   {
-                    text: `'words.no'`,
+                    text: `No`,
                     style: 'cancel',
                   },
-                  { text: `'words.yes'`, onPress: logout },
+                  {text: `YES`, onPress: logout},
                 ],
-                { cancelable: false },
+                {cancelable: true},
               )
             }
             icon={() => <Icon name="exit-to-app" color={'red'} size={25} />}
             label={'Logout'}
-            labelStyle={{ color: 'red' }}
+            labelStyle={{color: 'red'}}
           />
         )}
       </Drawer.Section>
