@@ -6,7 +6,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9fafd',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
   },
   text: {
     fontFamily: 'Kufam-SemiBoldItalic',

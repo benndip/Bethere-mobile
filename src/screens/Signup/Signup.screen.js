@@ -8,7 +8,9 @@ import {
   ScrollView,
   Dimensions,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 import PhoneInput from 'react-native-phone-number-input';
 import {RadioButton} from 'react-native-paper';
 import {DateTimePickerAndroid} from '@react-native-community/datetimepicker';
@@ -29,6 +31,8 @@ import {
 const Signup = ({navigation}) => {
   const phoneInput = useRef(null);
 
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [country, setCountry] = useState('Cameroon');
   const [phone, setPhone] = useState('');
@@ -40,6 +44,7 @@ const Signup = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   const showToastWithGravityAndOffset = message => {
+    setLoading(false);
     ToastAndroid.showWithGravityAndOffset(
       message,
       ToastAndroid.LONG,
@@ -82,17 +87,38 @@ const Signup = ({navigation}) => {
     axois
       .post('/register', userData)
       .then(res => {
-        // console.log(res.data.user);
-        setUser(res.data.user);
-        setToken(res.data.token);
+        const {status, data} = res;
+        // console.log(res);
+        if (status == 200) {
+          dispatch(setUser(data.user));
+          dispatch(setToken(data.token));
+          Alert.alert(
+            '✨ Successful Registration ✨',
+            'Welcome to Bethere, where the world is made known ',
+            [
+              {
+                text: 'Hurray!!!',
+                onPress: () => navigation.navigate('DrawerNavigation'),
+              },
+            ],
+            {
+              cancelable: false,
+            },
+          );
+        }
       })
       .catch(error => {
         if (error.response) {
-          Alert.alert('Signup Error', error.response.data.message, [
-            {text: 'OKAY', onPress: () => console.log('OK Pressed')},
-          ]);
+          const {status, data} = error.response;
+          console.log(data.message);
+          Alert.alert('❌ Signup Error ❌', data.message, [{text: 'OKAY'}]);
         } else if (error.request) {
           console.log(error.request);
+          Alert.alert(
+            'No internet',
+            'Please check your internet connection and try again',
+            [{text: 'OKAY'}],
+          );
         } else {
           console.log(error.message);
         }
@@ -128,7 +154,8 @@ const Signup = ({navigation}) => {
       behavior="height">
       <ScrollView
         contentContainerStyle={styles.container}
-        keyboardShouldPersistTaps="always">
+        keyboardShouldPersistTaps="always"
+        showsVerticalScrollIndicator={false}>
         <FocusAwareStatusBar
           barStyle="light-content"
           backgroundColor={theme.PRIMARY_COLOR}
@@ -203,7 +230,11 @@ const Signup = ({navigation}) => {
           passwordInput
         />
 
-        <FormButton buttonTitle="Sign Up" onPress={registerUser} />
+        {loading ? (
+          <ActivityIndicator size={'large'} color={theme.PRIMARY_COLOR} />
+        ) : (
+          <FormButton buttonTitle="Sign Up" onPress={registerUser} />
+        )}
 
         <View style={styles.textPrivate}>
           <Text style={styles.color_textPrivate}>

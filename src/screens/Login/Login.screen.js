@@ -36,6 +36,7 @@ const Login = ({navigation}) => {
   const [loading, setLoading] = useState(false);
 
   const showToastWithGravityAndOffset = message => {
+    setLoading(false);
     ToastAndroid.showWithGravityAndOffset(
       message,
       ToastAndroid.LONG,
