@@ -85,7 +85,7 @@ const Signup = ({navigation}) => {
     };
 
     axois
-      .post('/register', userData)
+      .post('/auth/register', userData)
       .then(res => {
         const {status, data} = res;
         // console.log(res);

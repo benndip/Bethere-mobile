@@ -60,7 +60,7 @@ const Login = ({navigation}) => {
     };
 
     axois
-      .post('/login', userData)
+      .post('/auth/login', userData)
       .then(res => {
         const {status, data} = res;
         // console.log(res);

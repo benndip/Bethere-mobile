@@ -6,6 +6,7 @@ import {
   Image,
   FlatList,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import Svg, {Path} from 'react-native-svg';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -18,8 +19,10 @@ import {
   PlaceCard,
   Search,
 } from '../../components';
-import {placetypes, places} from '../../../assets/data';
 import {useDispatch, useSelector} from 'react-redux';
+import axios from '../../axios/axios';
+import {setPlaces} from '../../redux/slices/places';
+import {setPlacetypes, togglePlacetypes} from '../../redux/slices/placetypes';
 
 const {height} = Dimensions.get('screen');
 
@@ -28,6 +31,7 @@ const TO_HEIGHT = height * 0.35;
 const Home = ({navigation}) => {
   const [placeTypesToShow, setPlaceTypesToShow] = useState([]);
   const [showingAllPlaceTypes, setShowingAllPlaceTypes] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const renderItem = ({item}) => {
     return (
@@ -35,23 +39,55 @@ const Home = ({navigation}) => {
     );
   };
 
-  const user = useSelector(state => state.auth.user);
+  const places = useSelector(state => state.places.places);
+  const placetypes = useSelector(state => state.placetypes.placetypes);
+  const currentPlacetypes = useSelector(
+    state => state.placetypes.currentPlacetypes,
+  );
 
-  const togglePlaceTypes = () => {
-    let placeTypes = showingAllPlaceTypes
-      ? placetypes.filter((_, index) => index < 6)
-      : placetypes;
-    setPlaceTypesToShow(placeTypes);
-    setShowingAllPlaceTypes(prev => !prev);
-  };
+  const dispatch = useDispatch();
 
   const inititiatePlaceTypes = () => {
     let placeTypes = placetypes.filter((_, index) => index < 6);
     setPlaceTypesToShow(placeTypes);
   };
 
+  const fetchPlacetypes = () => {
+    setLoading(true);
+    axios
+      .get('/place-types')
+      .then(res => {
+        const {status, data} = res;
+        dispatch(setPlacetypes(data.placeTypes));
+      })
+      .catch(error => {
+        console.log(error.response);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const fetchPlaces = () => {
+    setLoading(true);
+    axios
+      .get('/places')
+      .then(res => {
+        const {status, data} = res;
+        dispatch(setPlaces(data.places));
+      })
+      .catch(error => {
+        console.log(error.response);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
     inititiatePlaceTypes(); //This is to give just 6 placetypes initially
+    fetchPlaces();
+    fetchPlacetypes();
   }, []);
 
   return (
@@ -97,17 +133,24 @@ const Home = ({navigation}) => {
         ListHeaderComponent={
           <>
             <View style={styles.placetypesContainer}>
-              {placeTypesToShow.map(placetype => (
+              {currentPlacetypes.map(placetype => (
                 <PlacetypeCard item={placetype} key={placetype.id} />
               ))}
             </View>
             <View style={styles.popularAndViewAll}>
               <Text style={styles.popularText}>Popular in Town</Text>
-              <TouchableOpacity onPress={togglePlaceTypes}>
+              <TouchableOpacity onPress={() => dispatch(togglePlacetypes())}>
                 <Text style={styles.viewAllText}>View all</Text>
               </TouchableOpacity>
             </View>
           </>
+        }
+        ListEmptyComponent={
+          <ActivityIndicator
+            size={'large'}
+            color={theme.PRIMARY_COLOR}
+            style={{alignSelf: 'center'}}
+          />
         }
         numColumns={2}
         renderItem={renderItem}
