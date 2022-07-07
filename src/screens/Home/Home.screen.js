@@ -29,28 +29,21 @@ const {height} = Dimensions.get('screen');
 const TO_HEIGHT = height * 0.35;
 
 const Home = ({navigation}) => {
-  const [placeTypesToShow, setPlaceTypesToShow] = useState([]);
-  const [showingAllPlaceTypes, setShowingAllPlaceTypes] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const renderItem = ({item}) => {
     return (
-      <PlaceCard item={item} onPress={() => navigation.navigate('Details')} />
+      <PlaceCard
+        item={item}
+        onPress={() => navigation.navigate('Details', {item})}
+      />
     );
   };
 
-  const places = useSelector(state => state.places.places);
-  const placetypes = useSelector(state => state.placetypes.placetypes);
-  const currentPlacetypes = useSelector(
-    state => state.placetypes.currentPlacetypes,
-  );
+  const places = useSelector(state => state.places.currentPlaces);
+  const placetypes = useSelector(state => state.placetypes.currentPlacetypes);
 
   const dispatch = useDispatch();
-
-  const inititiatePlaceTypes = () => {
-    let placeTypes = placetypes.filter((_, index) => index < 6);
-    setPlaceTypesToShow(placeTypes);
-  };
 
   const fetchPlacetypes = () => {
     setLoading(true);
@@ -85,7 +78,6 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
-    inititiatePlaceTypes(); //This is to give just 6 placetypes initially
     fetchPlaces();
     fetchPlacetypes();
   }, []);
@@ -133,7 +125,7 @@ const Home = ({navigation}) => {
         ListHeaderComponent={
           <>
             <View style={styles.placetypesContainer}>
-              {currentPlacetypes.map(placetype => (
+              {placetypes.map(placetype => (
                 <PlacetypeCard item={placetype} key={placetype.id} />
               ))}
             </View>

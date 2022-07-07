@@ -24,7 +24,7 @@ const {height} = Dimensions.get('screen');
 const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
 
 const Details = ({route, navigation}) => {
-  // const { id, item_images, name, description, location, user, price, category_id } = route.params.item
+  const {id, place_images, name, about, lat, lng, reviews} = route.params.item;
 
   const scrollY = useRef(new Animated.Value(0)).current;
   const scrollViewRef = useRef(null);
@@ -84,8 +84,7 @@ const Details = ({route, navigation}) => {
 
   const readText = async () => {
     Tts.stop();
-    Tts.speak(`This is the first palace of Ozin and also the best that we can have here. This can just be the best thingthat we could do so that we have
-    our being. But I am not saying anything. He`);
+    Tts.speak(about);
     setPlaying(true);
   };
 
@@ -124,21 +123,17 @@ const Details = ({route, navigation}) => {
           <ImageViewer imageUrls={imagesForModal} />
         </Modal>
         <ImageBoard
-          item_images={item_images}
+          place_images={place_images}
           onImagePress={image => showImages(image)}
         />
         <View style={styles.placeAndRatingContainer}>
-          <Text style={styles.nameOfPlace}>Osing London</Text>
+          <Text style={styles.nameOfPlace}>{name}</Text>
           <TouchableOpacity style={styles.iconAndRatingContaier}>
             <Ionicons name="star" color="#f9ca24" size={22} />
-            <Text style={styles.ratingText}>4.5</Text>
+            <Text style={styles.ratingText}>{reviews.length}</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.details}>
-          This is the first palace of Ozin and also the best that we can have
-          here. This can just be the best thing that we could do so that we have
-          our being. But I am not saying anything. He
-        </Text>
+        <Text style={styles.details}>{about}</Text>
         <View
           style={{
             flexDirection: 'row',
@@ -185,13 +180,13 @@ const Details = ({route, navigation}) => {
             ]}>
             <AntDesign name="down" size={30} color="#ffffff" />
           </AnimatedTouchable>
-          <Map placeLocation={[4.6, 7.2]} />
+          <Map placeLocation={[lng, lat]} />
         </View>
       </Animated.ScrollView>
       {showNavigation && (
         <AutoNavigation
           onCancelNavigation={toggleNavigation}
-          placeLocation={[9, 4]}
+          placeLocation={[lng, lat]}
         />
       )}
       <TouchableOpacity
