@@ -21,7 +21,14 @@ import {
 } from '../../components';
 import {useDispatch, useSelector} from 'react-redux';
 import axios from '../../axios/axios';
-import {setPlaces} from '../../redux/slices/places';
+import {ScrollView} from 'react-native-gesture-handler';
+
+import {towns} from '../../../assets/data';
+import {
+  setPlaces,
+  setPlacesByTown,
+  setPlacesByPlacetype,
+} from '../../redux/slices/places';
 import {setPlacetypes, togglePlacetypes} from '../../redux/slices/placetypes';
 
 const {height} = Dimensions.get('screen');
@@ -77,7 +84,24 @@ const Home = ({navigation}) => {
       });
   };
 
+  const fetchTowns = () => {
+    setLoading(true);
+    axios
+      .get('/towns')
+      .then(res => {
+        const {status, data} = res;
+        dispatch(setTowns(data.places));
+      })
+      .catch(error => {
+        console.log(error.response);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   useEffect(() => {
+    fetchTowns();
     fetchPlaces();
     fetchPlacetypes();
   }, []);
@@ -117,6 +141,19 @@ const Home = ({navigation}) => {
             style={styles.avatarImage}
           />
         </TouchableOpacity>
+      </View>
+
+      <View style={styles.towns}>
+        <ScrollView
+          horizontal
+          contentContainerStyle={{alignItems: 'center', paddingLeft: 4}}
+          showsHorizontalScrollIndicator={false}>
+          {towns.map(town => (
+            <TouchableOpacity style={styles.town} key={town.id}>
+              <Text style={styles.townText}>{town.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
 
       <FlatList
