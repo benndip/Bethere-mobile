@@ -21,7 +21,9 @@ const PlaceCard = ({item, onPress}) => {
         />
       </View>
       <View style={styles.textContainer}>
-        <Text style={styles.placeName}>{name}</Text>
+        <Text numberOfLines={1} style={styles.placeName}>
+          {name}
+        </Text>
         <View style={{flexDirection: 'row', width: '100%'}}>
           <Entypo
             name="location-pin"

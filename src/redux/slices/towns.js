@@ -9,7 +9,7 @@ const townsSlice = createSlice({
   initialState,
   reducers: {
     setTowns: (state, action) => {
-      state.placetypes = action.payload;
+      state.towns = action.payload;
     },
   },
 });

@@ -1,6 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import {useDispatch} from 'react-redux';
+import {setPlacesByPlacetype} from '../../redux/slices/places';
 
 import styles from './PlacetypeCard.style';
 
@@ -9,6 +11,8 @@ const AnimatedTouchable = Animatable.createAnimatableComponent(Pressable);
 const PlacetypeCard = ({item}) => {
   const animationRef = useRef(null);
   const {name, icon} = item;
+
+  const dispatch = useDispatch();
 
   const fadeInDown = () => animationRef.current.fadeInDown();
 
@@ -19,9 +23,7 @@ const PlacetypeCard = ({item}) => {
   return (
     <AnimatedTouchable
       activeOpacity={0.7}
-      onPress={() => {
-        console.log('Hello');
-      }}
+      onPress={() => dispatch(setPlacesByPlacetype(item.id))}
       style={styles.container}
       ref={animationRef}>
       <View style={styles.iconContainer}>

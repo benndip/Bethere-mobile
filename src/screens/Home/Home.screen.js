@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import Svg, {Path} from 'react-native-svg';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+import Lottie from 'lottie-react-native';
 import styles from './Home.style';
 import theme from '../../theme';
 import {
@@ -23,15 +23,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import axios from '../../axios/axios';
 import {ScrollView} from 'react-native-gesture-handler';
 
-import {towns} from '../../../assets/data';
-import {
-  setPlaces,
-  setPlacesByTown,
-  setPlacesByPlacetype,
-} from '../../redux/slices/places';
+import {setPlaces, setPlacesByTown} from '../../redux/slices/places';
 import {setPlacetypes, togglePlacetypes} from '../../redux/slices/placetypes';
+import {setTowns} from '../../redux/slices/towns';
 
-const {height} = Dimensions.get('screen');
+const {width, height} = Dimensions.get('screen');
 
 const TO_HEIGHT = height * 0.35;
 
@@ -49,6 +45,7 @@ const Home = ({navigation}) => {
 
   const places = useSelector(state => state.places.currentPlaces);
   const placetypes = useSelector(state => state.placetypes.currentPlacetypes);
+  const towns = useSelector(state => state.towns.towns);
 
   const dispatch = useDispatch();
 
@@ -90,7 +87,7 @@ const Home = ({navigation}) => {
       .get('/towns')
       .then(res => {
         const {status, data} = res;
-        dispatch(setTowns(data.places));
+        dispatch(setTowns(data.towns));
       })
       .catch(error => {
         console.log(error.response);
@@ -102,8 +99,8 @@ const Home = ({navigation}) => {
 
   useEffect(() => {
     fetchTowns();
-    fetchPlaces();
     fetchPlacetypes();
+    fetchPlaces();
   }, []);
 
   return (
@@ -149,7 +146,10 @@ const Home = ({navigation}) => {
           contentContainerStyle={{alignItems: 'center', paddingLeft: 4}}
           showsHorizontalScrollIndicator={false}>
           {towns.map(town => (
-            <TouchableOpacity style={styles.town} key={town.id}>
+            <TouchableOpacity
+              onPress={() => dispatch(setPlacesByTown(town.id))}
+              style={styles.town}
+              key={town.id}>
               <Text style={styles.townText}>{town.name}</Text>
             </TouchableOpacity>
           ))}
@@ -174,12 +174,30 @@ const Home = ({navigation}) => {
             </View>
           </>
         }
+        refreshing={loading}
+        onRefresh={() => {
+          fetchPlaces();
+        }}
         ListEmptyComponent={
-          <ActivityIndicator
-            size={'large'}
-            color={theme.PRIMARY_COLOR}
-            style={{alignSelf: 'center'}}
-          />
+          <View
+            style={{
+              width,
+              height: '40%',
+              zIndex: 9999,
+              alignSelf: 'center',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Lottie
+              source={require('../../../assets/lotties/68796-empty-search.json')}
+              autoPlay
+              loop
+              style={{width: '100%', height: '100%'}}
+            />
+            <Text style={{alignSelf: 'center', marginTop: 10}}>
+              Ooops, no places found. Please tyr another
+            </Text>
+          </View>
         }
         numColumns={2}
         renderItem={renderItem}

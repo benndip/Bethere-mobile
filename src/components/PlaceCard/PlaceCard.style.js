@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   container: {
     width: 0.45 * width,
     flex: 1,
-    height: height * 0.25,
+    height: height * 0.27,
     borderRadius: 10,
     margin: 8,
     overflow: 'hidden',
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '65%',
+    height: '72%',
     borderRadius: 10,
     marginTop: 10,
     overflow: 'hidden',
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     padding: 2,
   },
   placeName: {
-    fontWeight: '900',
+    fontWeight: '700',
     fontSize: 16,
     marginBottom: 3,
   },

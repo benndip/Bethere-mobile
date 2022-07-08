@@ -15,23 +15,21 @@ const placesSlice = createSlice({
       state.currentPlaces = state.places;
     },
     setPlacesByTown: (state, action) => {
-      let {currentPlaces, places} = state;
-      state.selectedTownId = action.payload.id;
-      currentPlaces = places.filter(
-        place => place.town_id == action.payload.id,
+      state.selectedTownId = action.payload;
+      state.currentPlaces = state.places.filter(
+        place => place.town_id == action.payload,
       );
     },
     setPlacesByPlacetype: (state, action) => {
-      let {currentPlaces, places} = state;
-      if (selectedTownId) {
-        currentPlaces = places.filter(
+      if (state.selectedTownId) {
+        state.currentPlaces = state.places.filter(
           place =>
-            place.placetype_id == action.payload.id &&
-            place.town_id == action.payload.id,
+            place.placetype_id == action.payload &&
+            place.town_id == action.payload,
         );
       } else {
-        currentPlaces = places.filter(
-          place => place.placetype_id == action.payload.id,
+        state.currentPlaces = state.places.filter(
+          place => place.placetype_id == action.payload,
         );
       }
     },
