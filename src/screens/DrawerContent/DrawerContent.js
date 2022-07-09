@@ -25,6 +25,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Share from 'react-native-share';
@@ -72,7 +73,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
     setLoading(true);
     axios
       .post(
-        '/logout',
+        '/auth/logout',
         {},
         {
           headers: {
@@ -104,7 +105,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
         if (error.response) {
           const {status, data} = error.response;
           console.log(data.message);
-          Alert.alert('❌ Log Error ❌', data.message, [{text: 'OKAY'}]);
+          Alert.alert('❌ Logout Error ❌', data.message, [{text: 'OKAY'}]);
         } else if (error.request) {
           console.log(error.request);
           Alert.alert(
@@ -120,6 +121,10 @@ const DrawerContent = ({user, navigation, ...props}) => {
         setLoading(false);
       });
   };
+
+  // const deposit = () => {
+  //   axios.post('https://demo.campay.net/api/collect/', {});
+  // };
 
   return (
     <View style={{flex: 1}}>
@@ -307,6 +312,10 @@ const DrawerContent = ({user, navigation, ...props}) => {
             <Text style={styles.coinsText}>2,300</Text>
             <Text>coins</Text>
           </View>
+          <TouchableOpacity style={styles.depositTouch}>
+            <Entypo name="arrow-up" size={22} />
+            <Text>Deposit</Text>
+          </TouchableOpacity>
         </View>
       </DrawerContentScrollView>
 

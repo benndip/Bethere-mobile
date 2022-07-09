@@ -1,4 +1,5 @@
-import { StyleSheet } from 'react-native'
+import {StyleSheet} from 'react-native';
+import theme from '../../theme';
 
 const styles = StyleSheet.create({
   drawerContent: {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     alignItems: 'center',
-    marginVertical: 5
+    marginVertical: 5,
   },
   modalView: {
     position: 'absolute',
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
     height: 200,
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   flagImageAndTextView: {
     width: '33%',
@@ -70,20 +71,32 @@ const styles = StyleSheet.create({
   coinsText: {
     fontSize: 40,
     marginHorizontal: 10,
-    color: '#535c68'
+    color: '#535c68',
   },
-  coinIcon:{
+  coinIcon: {
     // alignSelf: 'flex-end'
   },
   coinsContainer: {
     width: '100%',
     height: 55,
     flexDirection: 'row',
-    alignItems:'flex-end',
+    alignItems: 'flex-end',
     // borderWidth: 1,
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 50
-  }
+    marginTop: 50,
+  },
+  depositTouch: {
+    width: 120,
+    height: 45,
+    backgroundColor: theme.SECONDARY_COLOR,
+    justifyContent: 'space-around',
+    borderRadius: 8,
+    alignSelf: 'center',
+    marginVertical: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+  },
 });
-export default styles
+export default styles;
