@@ -12,6 +12,7 @@ import AutoNavigation from './AutoNavigation/AutoNavigation.component';
 import Search from './Search/Search.component';
 import News from './News/News.component';
 import BethereText from './BethereText/BethereText.component';
+import PaymentModal from './PaymentModal/PaymentModal.component';
 
 export {
   FormButton,
@@ -28,4 +29,5 @@ export {
   Search,
   News,
   BethereText,
+  PaymentModal,
 };

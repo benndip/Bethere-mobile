@@ -35,6 +35,7 @@ import styles from './DrawerContent.style';
 import theme from '../../theme';
 import axios from '../../axios/axios';
 import {removeUserAndToken} from '../../redux/slices/auth';
+import {PaymentModal} from '../../components';
 
 //For the layout animation
 if (Platform.OS === 'android') {
@@ -129,6 +130,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView showsVerticalScrollIndicator={false} {...props}>
+        <PaymentModal isVisible={true} />
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View
@@ -314,7 +316,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
           </View>
           <TouchableOpacity style={styles.depositTouch}>
             <Entypo name="arrow-up" size={22} />
-            <Text>Deposit</Text>
+            <Text>Top up</Text>
           </TouchableOpacity>
         </View>
       </DrawerContentScrollView>

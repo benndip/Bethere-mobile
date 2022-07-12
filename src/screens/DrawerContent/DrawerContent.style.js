@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
   },
 });
 export default styles;
