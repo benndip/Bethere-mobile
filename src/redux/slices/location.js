@@ -9,6 +9,7 @@ const locationSlice = createSlice({
   initialState,
   reducers: {
     setLocation: (state, action) => {
+      console.log('Stuff changing' + action.payload);
       state.coords = action.payload;
     },
   },

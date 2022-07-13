@@ -20,7 +20,7 @@ const Maps = ({placeLocation}) => {
   const cameraRef = useRef(null);
 
   const [route, setRoute] = useState(null);
-  const [userLocation, setUserLocation] = useState([4, 9]);
+  const [userLocation, setUserLocation] = useState([9, 4]);
 
   const dispatch = useDispatch();
 
@@ -103,7 +103,7 @@ const Maps = ({placeLocation}) => {
           logoEnabled={false}
           compassEnabled={true}>
           <MapboxGL.Camera
-            zoomLevel={8}
+            zoomLevel={14}
             animationMode={'flyTo'}
             animationDuration={2500}
             ref={c => (cameraRef.current = c)}
@@ -115,12 +115,12 @@ const Maps = ({placeLocation}) => {
             snippet="ok"
             coordinate={placeLocation}
           />
-          <MapboxGL.UserLocation
+          {/* <MapboxGL.UserLocation
             animated={true}
             visible
-            onUpdate={onUserLocationUpdate}
+            // onUpdate={onUserLocationUpdate}
             showsUserHeadingIndicator
-          />
+          /> */}
           {renderRoute()}
         </MapboxGL.MapView>
       </View>

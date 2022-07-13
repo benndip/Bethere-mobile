@@ -17,7 +17,6 @@ import {
   Map,
   AutoNavigation,
 } from '../../components';
-import {item_images} from '../../../assets/data';
 
 const {height} = Dimensions.get('screen');
 
@@ -39,7 +38,7 @@ const Details = ({route, navigation}) => {
 
   const showImages = image => {
     let newImages = [];
-    newImages = item_images.map(image => ({
+    newImages = place_images.map(image => ({
       url: image.url,
       width: 400,
       height: 400,

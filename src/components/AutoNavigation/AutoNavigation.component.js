@@ -1,11 +1,31 @@
-import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
 import MapboxNavigation from '@homee/react-native-mapbox-navigation';
 import MapboxGL from '@react-native-mapbox-gl/maps';
+import Geolocation from 'react-native-geolocation-service';
+import {setLocation} from '../../redux/slices/location';
+import {useDispatch} from 'react-redux';
 
 import styles from './AutoNavigation.style';
 
 const AutoNavigation = ({placeLocation, onCancelNavigation}) => {
+  const [userLocation, setUserLocation] = useState([4, 9]);
+
+  const dispatch = useDispatch();
+
+  const onUserLocationUpdate = () => {
+    Geolocation.getCurrentPosition(
+      info => {
+        dispatch(setLocation([info.coords.longitude, info.coords.latitude]));
+        setUserLocation([info.coords.longitude, info.coords.latitude]);
+      },
+      error => {
+        console.log(error.code, error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
+  };
+
   useEffect(() => {
     MapboxGL.locationManager.start();
   }, []);
@@ -13,13 +33,11 @@ const AutoNavigation = ({placeLocation, onCancelNavigation}) => {
   return (
     <View style={styles.container}>
       <MapboxNavigation
-        origin={[-97.760288, 30.273566]}
+        origin={[4, 9]}
         destination={placeLocation}
         shouldSimulateRoute={true}
         showsEndOfRouteFeedback
-        onLocationChange={event => {
-          const {latitude, longitude} = event.nativeEvent;
-        }}
+        onLocationChange={onUserLocationUpdate}
         onRouteProgressChange={event => {
           const {
             distanceTraveled,

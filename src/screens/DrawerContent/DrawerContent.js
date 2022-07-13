@@ -48,6 +48,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
   const [selectLanguage, setSelectLanguage] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentLocale, setCurrentLocale] = useState('en');
+  const [modalVisible, setModalVisible] = useState(false);
 
   const token = useSelector(state => state.auth.token);
   const dispatch = useDispatch();
@@ -68,6 +69,10 @@ const DrawerContent = ({user, navigation, ...props}) => {
       console.log('Sharing Error::=>', error);
       // return error
     }
+  };
+
+  const toggleModal = () => {
+    setModalVisible(prev => !prev);
   };
 
   const logout = () => {
@@ -130,7 +135,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView showsVerticalScrollIndicator={false} {...props}>
-        <PaymentModal isVisible={true} />
+        <PaymentModal onBackdropPress={toggleModal} isVisible={modalVisible} />
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View
@@ -314,7 +319,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
             <Text style={styles.coinsText}>2,300</Text>
             <Text>coins</Text>
           </View>
-          <TouchableOpacity style={styles.depositTouch}>
+          <TouchableOpacity onPress={toggleModal} style={styles.depositTouch}>
             <Entypo name="arrow-up" size={22} />
             <Text>Top up</Text>
           </TouchableOpacity>

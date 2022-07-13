@@ -12,7 +12,7 @@ import {useSelector} from 'react-redux';
 import axios from '../../axios/axios';
 import styles from './PaymentModal.style';
 
-const PaymentModal = ({isVisible}) => {
+const PaymentModal = ({isVisible, onBackdropPress}) => {
   const [amount, setAmount] = useState(0);
   const [phone, setPhone] = useState('');
   const [reason, setReason] = useState('');
@@ -79,7 +79,7 @@ const PaymentModal = ({isVisible}) => {
   };
 
   return (
-    <Modal isVisible={isVisible}>
+    <Modal isVisible={isVisible} onBackdropPress={onBackdropPress}>
       <View style={styles.container}>
         <Text style={styles.topUpAccountText}>Top up account</Text>
         <TextInput
