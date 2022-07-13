@@ -33,6 +33,7 @@ const TO_HEIGHT = height * 0.35;
 
 const Home = ({navigation}) => {
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(' ');
 
   const renderItem = ({item}) => {
     return (
@@ -97,6 +98,14 @@ const Home = ({navigation}) => {
       });
   };
 
+  const search = items => {
+    return items.filter(
+      item =>
+        item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.about.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  };
+
   useEffect(() => {
     fetchTowns();
     fetchPlacetypes();
@@ -158,21 +167,23 @@ const Home = ({navigation}) => {
 
       <FlatList
         style={styles.flatList}
-        data={places}
+        data={search(places)}
         ListHeaderComponent={
-          <>
-            <View style={styles.placetypesContainer}>
-              {placetypes.map(placetype => (
-                <PlacetypeCard item={placetype} key={placetype.id} />
-              ))}
-            </View>
-            <View style={styles.popularAndViewAll}>
-              <Text style={styles.popularText}>Popular in Town</Text>
-              <TouchableOpacity onPress={() => dispatch(togglePlacetypes())}>
-                <Text style={styles.viewAllText}>View all</Text>
-              </TouchableOpacity>
-            </View>
-          </>
+          searchTerm.length == 0 && (
+            <>
+              <View style={styles.placetypesContainer}>
+                {placetypes.map(placetype => (
+                  <PlacetypeCard item={placetype} key={placetype.id} />
+                ))}
+              </View>
+              <View style={styles.popularAndViewAll}>
+                <Text style={styles.popularText}>Popular in Town</Text>
+                <TouchableOpacity onPress={() => dispatch(togglePlacetypes())}>
+                  <Text style={styles.viewAllText}>View all</Text>
+                </TouchableOpacity>
+              </View>
+            </>
+          )
         }
         refreshing={loading}
         onRefresh={() => {
@@ -203,7 +214,7 @@ const Home = ({navigation}) => {
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
       />
-      <Search toHeight={TO_HEIGHT} />
+      <Search onChangeText={text => setSearchTerm(text)} toHeight={TO_HEIGHT} />
     </View>
   );
 };

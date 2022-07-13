@@ -57,7 +57,7 @@ const Details = ({route, navigation}) => {
   };
 
   const toggleNavigation = () => {
-    setShowNavigation(prev => !prev);
+    setShowNavigation(false);
   };
 
   const scrollToBottomScale = scrollY.interpolate({

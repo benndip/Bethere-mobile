@@ -115,12 +115,12 @@ const Maps = ({placeLocation}) => {
             snippet="ok"
             coordinate={placeLocation}
           />
-          {/* <MapboxGL.UserLocation
+          <MapboxGL.UserLocation
             animated={true}
             visible
-            // onUpdate={onUserLocationUpdate}
+            onUpdate={onUserLocationUpdate}
             showsUserHeadingIndicator
-          /> */}
+          />
           {renderRoute()}
         </MapboxGL.MapView>
       </View>

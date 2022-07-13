@@ -6,7 +6,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './PlaceCard.style';
 
 const PlaceCard = ({item, onPress}) => {
-  const {name, lat, lng, place_images} = item;
+  const {name, lat, lng, placetype, town, place_images} = item;
 
   return (
     <Pressable style={styles.container} onPress={onPress}>
@@ -31,7 +31,9 @@ const PlaceCard = ({item, onPress}) => {
             size={18}
             style={{marginLeft: -5}}
           />
-          <Text numberOfLines={1}>PlaceCard, Bali</Text>
+          <Text style={{letterSpacing: 2}} numberOfLines={1}>
+            {town.name}
+          </Text>
         </View>
       </View>
     </Pressable>
