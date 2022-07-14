@@ -9,7 +9,7 @@ import {useDispatch} from 'react-redux';
 import styles from './AutoNavigation.style';
 
 const AutoNavigation = ({placeLocation, onCancelNavigation}) => {
-  const [userLocation, setUserLocation] = useState([4, 9]);
+  const [userLocation, setUserLocation] = useState([9, 4]);
 
   const dispatch = useDispatch();
 
@@ -33,7 +33,7 @@ const AutoNavigation = ({placeLocation, onCancelNavigation}) => {
   return (
     <View style={styles.container}>
       <MapboxNavigation
-        origin={[4, 9]}
+        origin={userLocation}
         destination={placeLocation}
         shouldSimulateRoute={true}
         showsEndOfRouteFeedback

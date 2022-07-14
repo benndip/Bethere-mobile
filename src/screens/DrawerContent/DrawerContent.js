@@ -44,13 +44,15 @@ if (Platform.OS === 'android') {
   }
 }
 
-const DrawerContent = ({user, navigation, ...props}) => {
+const DrawerContent = ({navigation, ...props}) => {
   const [selectLanguage, setSelectLanguage] = useState(false);
   const [loading, setLoading] = useState(false);
   const [currentLocale, setCurrentLocale] = useState('en');
   const [modalVisible, setModalVisible] = useState(false);
 
   const token = useSelector(state => state.auth.token);
+  const user = useSelector(state => state.auth.user);
+
   const dispatch = useDispatch();
 
   const changeLanguage = () => {
@@ -127,10 +129,6 @@ const DrawerContent = ({user, navigation, ...props}) => {
         setLoading(false);
       });
   };
-
-  // const deposit = () => {
-  //   axios.post('https://demo.campay.net/api/collect/', {});
-  // };
 
   return (
     <View style={{flex: 1}}>
@@ -316,7 +314,7 @@ const DrawerContent = ({user, navigation, ...props}) => {
               color="#f0932b"
               style={styles.coinIcon}
             />
-            <Text style={styles.coinsText}>2,300</Text>
+            <Text style={styles.coinsText}>{user.coins}</Text>
             <Text>coins</Text>
           </View>
           <TouchableOpacity onPress={toggleModal} style={styles.depositTouch}>

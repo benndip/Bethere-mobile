@@ -26,6 +26,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {setPlaces, setPlacesByTown} from '../../redux/slices/places';
 import {setPlacetypes, togglePlacetypes} from '../../redux/slices/placetypes';
 import {setTowns} from '../../redux/slices/towns';
+import {setUser} from '../../redux/slices/auth';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -34,6 +35,8 @@ const TO_HEIGHT = height * 0.35;
 const Home = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState(' ');
+
+  const token = useSelector(state => state.auth.token);
 
   const renderItem = ({item}) => {
     return (
@@ -98,6 +101,26 @@ const Home = ({navigation}) => {
       });
   };
 
+  const fetchUserDetails = () => {
+    setLoading(true);
+    axios
+      .get('/user-info', {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      })
+      .then(res => {
+        const {status, data} = res;
+        dispatch(setUser(data.user));
+      })
+      .catch(error => {
+        console.log(error.response);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const search = items => {
     return items.filter(
       item =>
@@ -107,6 +130,7 @@ const Home = ({navigation}) => {
   };
 
   useEffect(() => {
+    fetchUserDetails();
     fetchTowns();
     fetchPlacetypes();
     fetchPlaces();
@@ -136,7 +160,7 @@ const Home = ({navigation}) => {
           <Text style={styles.currentLocationText}>Current location</Text>
           <View style={styles.iconAndLocation}>
             <Entypo name="location-pin" color="#3BAFE9" size={18} />
-            <Text style={styles.locationText}>Depansar, Bali</Text>
+            <Text style={styles.locationText}>Cameroon, Buea</Text>
           </View>
         </View>
         <TouchableOpacity
@@ -188,6 +212,9 @@ const Home = ({navigation}) => {
         refreshing={loading}
         onRefresh={() => {
           fetchPlaces();
+          fetchUserDetails();
+          fetchTowns();
+          fetchPlacetypes();
         }}
         ListEmptyComponent={
           <View

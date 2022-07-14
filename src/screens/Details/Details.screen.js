@@ -60,6 +60,10 @@ const Details = ({route, navigation}) => {
     setShowNavigation(false);
   };
 
+  const startAutonavigation = () => {
+    setShowNavigation(true);
+  };
+
   const scrollToBottomScale = scrollY.interpolate({
     inputRange: [-1, 0, height * 0.9],
     outputRange: [0, 0, 1],
@@ -191,7 +195,7 @@ const Details = ({route, navigation}) => {
       <TouchableOpacity
         style={styles.touch}
         activeOpacity={0.7}
-        onPress={toggleNavigation}>
+        onPress={startAutonavigation}>
         <Text style={styles.touchText}>Take me there</Text>
       </TouchableOpacity>
     </View>

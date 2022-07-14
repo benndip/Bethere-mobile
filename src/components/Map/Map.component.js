@@ -101,6 +101,7 @@ const Maps = ({placeLocation}) => {
           centerCoordinate={userLocation}
           style={styles.container}
           logoEnabled={false}
+          onUserLocationUpdate={onUserLocationUpdate}
           compassEnabled={true}>
           <MapboxGL.Camera
             zoomLevel={14}
