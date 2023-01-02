@@ -1,34 +1,41 @@
 import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
+import {Dimensions} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Foundation from 'react-native-vector-icons/Foundation';
 
-import {Home, Map, News, Account, WasThere} from '../screens';
+import { BottomNavigatorParamList } from './types/BottomNavigatorParamList';
+import HomeStack from './stacks/HomeStack';
+import LocationStack from './stacks/LocationStack';
+import WasThereStack from './stacks/WasThereStack';
+import AccountStack from './stacks/AccountStack';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<BottomNavigatorParamList>();
 
 const { height } = Dimensions.get('window');
 
 const BottomNavigation = () => {
+
+  const { Navigator, Screen } = Tab
+
   return (
-    <Tab.Navigator
+    <Navigator
       translucent={true}
       shifting={false}
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
-          let iconName;
+          let iconName: string = '';
 
-          if (route.name === 'Home') {
+          if (route.name === 'HomeStack') {
             iconName = focused ? 'ios-home' : 'ios-home-outline';
           }
-          if (route.name === 'Map') {
+          if (route.name === 'LocationStack') {
             iconName = focused ? 'location' : 'location-outline';
           }
-          if (route.name === 'WasThere') {
+          if (route.name === 'WasThereStack') {
             iconName = 'social-myspace'
           }
-          if (route.name === 'Account') {
+          if (route.name === 'AccountStack') {
             iconName = focused ? 'md-person' : 'md-person-outline';
           }
 
@@ -45,17 +52,17 @@ const BottomNavigation = () => {
         tabBarShowLabel: false,
         headerShown: false,
       })}>
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen
-        name="Map"
-        component={Map}
+      <Screen name="HomeStack" component={HomeStack} />
+      <Screen
+        name="LocationStack"
+        component={LocationStack}
         options={({route}) => ({
           tabBarStyle: {display: 'none'},
         })}
       />
-      <Tab.Screen name="WasThere" component={WasThere} options={{ tabBarIcon: ({ color }) => <Foundation name='social-myspace' size={22} color={color} /> }} />
-      <Tab.Screen name="Account" component={Account} />
-    </Tab.Navigator>
+      <Screen name="WasThereStack" component={WasThereStack} options={{ tabBarIcon: ({ color }) => <Foundation name='social-myspace' size={22} color={color} /> }} />
+      <Screen name="AccountStack" component={AccountStack} />
+    </Navigator>
   );
 };
 

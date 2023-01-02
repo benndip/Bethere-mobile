@@ -12,6 +12,7 @@ import News from "./News/News.screen";
 import DrawerContent from './DrawerContent/DrawerContent';
 import Payment from "./Payment/Payment.screen";
 import WasThere from "./WasThere/WasThere.screen";
+import WasThereDetails from "./WasThereDetails/WasThereDetails.screen";
 
 export {
     Splash,
@@ -27,5 +28,6 @@ export {
     News,
     DrawerContent,
     Payment,
-    WasThere
+    WasThere,
+    WasThereDetails
 }
