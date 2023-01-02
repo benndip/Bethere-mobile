@@ -3,7 +3,7 @@ import { DEVICE_WIDTH } from "../../theme/sizes";
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     header: {
         width: DEVICE_WIDTH * 0.4,
@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
         flex: 1
     },
     flatList: {
-        width: DEVICE_WIDTH,
+        alignSelf: 'center',
+        flex: 1
     },
     listFooterComponent: {
         width: DEVICE_WIDTH,

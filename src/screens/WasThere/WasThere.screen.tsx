@@ -1,11 +1,12 @@
 import { View, Text, SafeAreaView, FlatList, Dimensions, ScrollView } from 'react-native'
 import React from 'react'
 import styles from './WasThere.style'
-import { FlashList } from "@shopify/flash-list";
+import { FlashList, MasonryFlashList } from "@shopify/flash-list";
 import { Post } from '../../components';
 import { PostItemType } from '../../components/types';
 import Animated, { Extrapolate, interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { DEVICE_WIDTH } from '../../theme/sizes';
+import MasonryList from '@react-native-seoul/masonry-list';
 
 type FlatListItemType = {
   id: number
@@ -77,7 +78,7 @@ const WasThere = () => {
     }
   ]
 
-  const flatLists: any = [
+  const flatLists: {id: number, data: PostItemType[]}[] | any = [
     {
       id: 1,
       data: posts
@@ -88,26 +89,42 @@ const WasThere = () => {
     }
   ];
 
+  // const renderFlashList = ({item}: {item: FlatListItemType}) => {
+  //   return (
+  //     <ScrollView showsVerticalScrollIndicator={false}>
+  //       <View style={{width: DEVICE_WIDTH,flexDirection: 'row', paddingHorizontal: 3, justifyContent: 'space-between' }}>
+  //         <View style={styles.individualMasonryContainer}>
+  //           {item.data
+  //             .filter((_, i) => i % 2 !== 0)
+  //             .map((item: PostItemType, i: number) => (
+  //               <Post item={item} />
+  //             ))}
+  //         </View>
+  //         <View style={styles.individualMasonryContainer}>
+  //           {item.data
+  //             .filter((_, i) => i % 2 == 0)
+  //             .map((item: PostItemType, i: number) => (
+  //               <Post item={item} />
+  //             ))}
+  //         </View>
+  //       </View>
+  //     </ScrollView>
+  //   );
+  // };
+
   const renderFlashList = ({item}: {item: FlatListItemType}) => {
     return (
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{width: DEVICE_WIDTH,flexDirection: 'row', paddingHorizontal: 3, justifyContent: 'space-between' }}>
-          <View style={styles.individualMasonryContainer}>
-            {item.data
-              .filter((_, i) => i % 2 !== 0)
-              .map((item: PostItemType, i: number) => (
-                <Post item={item} />
-              ))}
-          </View>
-          <View style={styles.individualMasonryContainer}>
-            {item.data
-              .filter((_, i) => i % 2 == 0)
-              .map((item: PostItemType, i: number) => (
-                <Post item={item} />
-              ))}
-          </View>
-        </View>
-      </ScrollView>
+      <View style={{width: DEVICE_WIDTH, flex: 1, alignSelf: 'center',}}>
+        <MasonryFlashList
+          data={item.data}
+          keyExtractor={item => item.id.toString()}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}: {item: PostItemType}) => <Post item={item} />}
+          onEndReachedThreshold={0.1}
+          style={{ alignSelf: 'center', width: DEVICE_WIDTH }}
+        />
+      </View>
     );
   };
 

@@ -11,7 +11,7 @@ const WasThereStack = () => {
     const { Navigator, Screen } = Stack
     
     return (
-        <Navigator screenOptions={{ headerShown: false }} initialRouteName='WasThereDetails'>
+        <Navigator screenOptions={{ headerShown: false }} initialRouteName='WasThere'>
             <Screen name='WasThere' component={WasThere} />
             <Screen name='WasThereDetails' component={WasThereDetails} />
         </Navigator>
