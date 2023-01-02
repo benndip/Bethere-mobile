@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import {View, Text, Image, ScrollView} from 'react-native';
+import {View, Text, Image, ScrollView, TouchableOpacity} from 'react-native';
 import PaginatorIndicator from '../../components/PaginatorIndicator/PaginatorIndicator.component';
 import {DEVICE_WIDTH} from '../../theme/sizes';
 import styles from './WasThereDetails.style';
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const WasThereDetails: React.FC = () => {
 
@@ -35,7 +37,30 @@ const WasThereDetails: React.FC = () => {
         })}
       </ScrollView>
       <PaginatorIndicator activeIndex={activeIndex} data={images} />
-      <Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</Text>
+      <View>
+        <View style={styles.avatarAndTextAndFollowContainer}>
+          <View style={styles.avatarAndTextContainer}>
+            <Image source={{ uri: 'https://thumbs.dreamstime.com/b/jour-de-terre-d-environnement-dans-les-mains-des-arbres-cultivant-jeunes-plantes-bokeh-verdissent-la-main-femelle-fond-tenant-l-130247647.jpg' }} style={styles.avatar} />
+            <View style={styles.textsContainer}>
+              <Text>Beendip</Text>
+              <Text>216k followers</Text>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.followButton}>
+            <Text>Follow</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Text style={styles.captionText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</Text>
+      <View style={styles.visitAndHeartContainer}>
+        <View style={styles.visitContainer}>
+          <Text>Visit</Text>
+        </View>
+        <TouchableOpacity>
+          <Ionicons style={styles.heartIcon} name='heart' color='#ee5253' size={30} />
+        </TouchableOpacity>
+      </View>
+      <Text>More Like this</Text>
     </ScrollView>
   );
 };
