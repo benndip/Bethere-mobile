@@ -63,6 +63,9 @@ const styles = StyleSheet.create({
   },
   heartIcon: {
     marginLeft: 10
+  },
+  moreLikeThis: {
+    alignSelf: 'center'
   }
 });
 
